@@ -2,6 +2,7 @@ import { useSpring } from "@react-spring/three";
 import { useGLTF, Clone, Float, Sparkles, Html, Text } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import { easing } from "maath";
+
 import { forwardRef, useRef, useEffect, MutableRefObject } from "react";
 import { Mesh, Group } from "three";
 import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
@@ -130,20 +131,25 @@ const Frames = ({
           <FrameModel total={144} ref={cloneRef} />
         </Float>
         <Html fullscreen position={[0, 0, 6]}>
-          <div className="selection:bg-primary flex h-screen flex-col items-center justify-center tracking-widest selection:text-black">
-            <div className="text-center text-6xl font-black text-blue-200 md:text-8xl 2xl:text-9xl">
-              Add Another Dimension
+          <div className="flex flex-col items-center justify-around h-screen">
+            <div></div>
+            <div className="flex flex-col items-center justify-center tracking-widest ">
+              <div className="text-center text-6xl font-black tracking-normal text-blue-200 md:text-8xl 2xl:text-9xl">
+                Add Another Dimension
+              </div>
+              <div className="text-center text-xl font-light tracking-widest text-blue-200 md:text-3xl">
+                With Martnetics
+              </div>
+              
             </div>
-            <div className="text-center text-xl font-normal text-blue-200 md:text-3xl">
-              With Martnetics
-            </div>
+            <div className="text-blue-200 text-lg tracking-widest font-light">scroll down</div>
           </div>
         </Html>
         <Sparkles speed={2} size={50} scale={1000} />
         <directionalLight
           position={[0, 0, 20]}
-          color={"rgb(86, 138, 177)"}
-          intensity={2}
+          color={"rgb(0, 29, 218)"}
+          intensity={3}
         />
       </group>
     </>

@@ -58,7 +58,7 @@ function Model(props: {
       rotation: [0, 2 * Math.PI, 0],
     },
     loop: true,
-    config: { duration: 7000 },
+    config: { duration: 4000 },
   });
   return (
     <animated.group
@@ -68,7 +68,7 @@ function Model(props: {
       dispose={null}
     >
       <mesh castShadow geometry={nodes.Circle.geometry}>
-        <meshBasicMaterial color={"#e4a78b"} attach="material" />
+        <meshBasicMaterial color={"#000000"} attach="material" />
       </mesh>
       <mesh
         geometry={nodes.Cube.geometry}
@@ -140,7 +140,7 @@ export default function Watch({
   const globalRef = useRef<THREE.Group>(null);
   const dlRef = useRef<THREE.Group>(null);
   const [isMobile, setIsMobile] = useState<boolean>();
-
+  const state = useThree();
   useEffect(() => {
     function handleResize() {
       let check = false;
@@ -199,13 +199,14 @@ export default function Watch({
       }
     }
   });
+
   return (
     <>
       <group ref={globalRef} position={position}>
         <PresentationControls enabled={isMobile ? false : true} snap={true}>
           <Model position={[0, 0, 0]} scale={15} isMobile={isMobile} />
         </PresentationControls>
-        <ContactShadows />
+        
         <animated.group ref={dlRef} rotation={spring.rotation as any}>
           <pointLight intensity={400} position={[0, 6, 0]} />
           <pointLight intensity={400} position={[0, -6, 0]} />
