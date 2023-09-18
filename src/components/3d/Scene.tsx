@@ -14,7 +14,7 @@ function Perm() {
   //   };
   // }, []);
 
-  const { active, progress, errors, item, loaded, total } = useProgress();
+  const {progress} = useProgress();
 
   return (
     <Html center>
@@ -29,15 +29,6 @@ export const Scene = () => {
   const pages = useRef<number>(8);
   const [m, setM] = useState<number>(0.002);
   const camRef = useRef(null);
-  const spring = useSpring({
-    from: {
-      position: [-2, 0, 10],
-    },
-    to: {
-      position: [2, 0, 10]
-    },
-    loop: true
-  });
   useEffect(() => {
     window.addEventListener("wheel", (e) => {
       if (m + Math.sign(e.deltaY) / 100 > 0.002) {
@@ -63,7 +54,7 @@ export const Scene = () => {
       <color attach={"background"} args={["#000000"]} />
       <PerspectiveCamera
         fov={140}
-        position={spring.position as any}
+        position={[0,0,10]}
         makeDefault
         ref={camRef}
       />

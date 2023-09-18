@@ -164,11 +164,9 @@ export default function Watch({
   const spring = useSpring({
     from: {
       rotation: [0, 0, 0],
-      rotation_watch: [0, 0, 0],
     },
     to: {
       rotation: [0, 2 * Math.PI, 0],
-      rotation_watch: [0, 0, 2 * Math.PI],
     },
     loop: true,
     config: {

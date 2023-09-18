@@ -4,7 +4,7 @@ import { useFrame, useThree } from "@react-three/fiber";
 import { easing } from "maath";
 
 import { forwardRef, useRef, useEffect, MutableRefObject } from "react";
-import { Mesh, Group } from "three";
+import type { Mesh, Group } from "three";
 import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
 
 type GLTFResult = GLTF & {
