@@ -4,7 +4,7 @@ import { useFrame, useThree } from "@react-three/fiber";
 import { easing } from "maath";
 
 import { forwardRef, useRef, useEffect, MutableRefObject } from "react";
-import type { Mesh, Group } from "three";
+import { type Mesh, type Group, Color } from "three";
 import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
 
 type GLTFResult = GLTF & {
@@ -51,7 +51,7 @@ const Frames = ({
   const frameIndex = useRef<number[]>([]);
   const coords = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
   const globalRef = useRef<Group>(null);
-
+  
   useEffect(() => {
     const space = 3;
     let x = (Math.sqrt(cloneRef.current.length) * space) / -2;
@@ -89,6 +89,7 @@ const Frames = ({
         state.camera.fov = 140;
         state.camera.updateProjectionMatrix();
       }
+      
       if (globalRef.current) {
         if (!globalRef.current.visible) {
           globalRef.current.visible = true;
@@ -130,21 +131,6 @@ const Frames = ({
         <Float rotationIntensity={1} speed={1}>
           <FrameModel total={144} ref={cloneRef} />
         </Float>
-        <Html fullscreen position={[0, 0, 6]}>
-          <div className="flex flex-col items-center justify-around h-screen">
-            <div></div>
-            <div className="flex flex-col items-center justify-center tracking-widest ">
-              <div className="text-center text-6xl font-black tracking-normal text-blue-200 md:text-8xl 2xl:text-9xl">
-                Add Another Dimension
-              </div>
-              <div className="text-center text-xl font-light tracking-widest text-blue-200 md:text-3xl">
-                With Martnetics
-              </div>
-              
-            </div>
-            <div className="text-blue-200 text-lg tracking-widest font-light">scroll down</div>
-          </div>
-        </Html>
         <Sparkles speed={2} size={50} scale={1000} />
         <directionalLight
           position={[0, 0, 20]}
