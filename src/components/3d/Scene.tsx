@@ -1,5 +1,10 @@
 import { useSpring } from "@react-spring/three";
-import { CameraControls, Html, PerspectiveCamera, useProgress } from "@react-three/drei";
+import {
+  CameraControls,
+  Html,
+  PerspectiveCamera,
+  useProgress,
+} from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import { easing } from "maath";
 import { Suspense, useEffect, useRef, useState } from "react";
@@ -15,7 +20,7 @@ function Perm() {
   //   };
   // }, []);
 
-  const {progress} = useProgress();
+  const { progress } = useProgress();
 
   return (
     <Html center>
@@ -26,43 +31,36 @@ function Perm() {
   );
 }
 
-export const Scene = ({m}: {m:number}) => {
+export const Scene = ({ m, isMobile }: { m: number; isMobile: boolean }) => {
   const pages = useRef<number>(8);
-  
   const camRef = useRef(null);
-  const color = new Color(0x000000)
   
-  
+
   useFrame((state, dt) => {
-    
-    if (m > 0.15 && m < 0.3) {
+    if (m > 1/pages.current && m < 2/pages.current) {
       easing.damp(state.camera.position, "z", -90, 0.4, dt);
-      if (state.camera.position.z >= -80) {
-        state.scene.background = color.set("rgb(72, 123, 155)")
-      }
       state.camera.updateProjectionMatrix();
     } else {
       easing.damp(state.camera.position, "z", 10, 0.4, dt);
-      state.scene.background = color.set("#000000")
       state.camera.updateProjectionMatrix();
     }
   });
 
   return (
     <Suspense fallback={<Perm />}>
-      <color attach={"background"} args={["#000000"]} />
       <PerspectiveCamera
         fov={140}
-        position={[0,0,10]}
+        position={[0, 0, 10]}
         makeDefault
         ref={camRef}
       />
-      <Frames start={0} end={1.2 / pages.current} prog={m} />
+      <Frames start={0} end={1 / pages.current} prog={m} />
       <Watch
-        start={1.2 / pages.current}
+        start={1 / pages.current}
         end={2 / pages.current}
         prog={m}
         position={[0, 0, -100]}
+        isMobile={isMobile}
       />
     </Suspense>
   );

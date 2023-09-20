@@ -13,6 +13,7 @@
   "dependencies": {
     "@prisma/client": "^5.1.1",
     "@react-spring/three": "^9.7.3",
+    "@react-spring/web": "^9.7.3",
     "@react-three/drei": "^9.83.9",
     "@react-three/fiber": "^8.14.1",
     "@t3-oss/env-nextjs": "^0.6.0",
