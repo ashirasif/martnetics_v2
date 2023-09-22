@@ -2,10 +2,12 @@ import * as THREE from "three";
 import React, { useRef, useState, useEffect } from "react";
 import {
   ContactShadows,
+  Environment,
   Html,
   OrbitControls,
   PresentationControls,
   ScreenSpace,
+  useEnvironment,
   useGLTF,
 } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
@@ -93,7 +95,7 @@ function Model(props: {
       <mesh geometry={nodes.Circle002.geometry}>
         <meshStandardMaterial
           transparent
-          opacity={0.4}
+          opacity={0.3}
           metalness={1}
           roughness={0}
         />
@@ -131,26 +133,27 @@ export default function Watch({
   end,
   prog,
   position,
-  isMobile
+  isMobile,
 }: {
   start: number;
   end: number;
   prog: number;
   position: [number, number, number];
-  isMobile: boolean
+  isMobile: boolean;
 }) {
   const globalRef = useRef<THREE.Group>(null);
   const dlRef = useRef<THREE.Group>(null);
+  const hdr = useEnvironment({ preset: "studio" });
   const spring = useSpring({
     from: {
       rotation: [0, 0, 0],
     },
     to: {
-      rotation: [0, 2 * Math.PI, 0],
+      rotation: [0, Math.PI * 2, 0],
     },
     loop: true,
     config: {
-      duration: 10000,
+      duration: 4000,
     },
   });
 
@@ -159,6 +162,8 @@ export default function Watch({
       if (globalRef.current && dlRef.current) {
         if (!globalRef.current?.visible) {
           globalRef.current.visible = true;
+          state.scene.environment = hdr;
+          console.log(state.scene.environment)
         }
         // @ts-ignore
         if (state.camera.fov != 40) {
@@ -183,15 +188,19 @@ export default function Watch({
       <group ref={globalRef} position={position}>
         <PresentationControls enabled={isMobile ? false : true} snap={true}>
           <Model position={[0, 0, 0]} scale={15} isMobile={isMobile} />
+          <ContactShadows
+            position={[0, -1, 0]}
+            opacity={0.75}
+            scale={10}
+            blur={2.5}
+          />
         </PresentationControls>
-        
-        <animated.group ref={dlRef} rotation={spring.rotation as any}>
+
+        <animated.group ref={dlRef}>
           <pointLight intensity={400} position={[0, 6, 0]} />
           <pointLight intensity={400} position={[0, -6, 0]} />
-          <pointLight intensity={400} position={[6, 1, 0]} />
-          <pointLight intensity={400} position={[-6, 1, 0]} />
-          <pointLight intensity={400} position={[6, 1, 6]} />
-          <pointLight intensity={400} position={[-6, 1, 6]} />
+          <pointLight intensity={400} position={[6, 1, 15]} />
+          
         </animated.group>
       </group>
     </>

@@ -6,19 +6,27 @@ import { api } from "~/utils/api";
 import { Scene } from "../components/3d/Scene";
 import { useEffect, useRef, useState } from "react";
 import NavBar from "~/components/navbar";
-import { useSpring, config, a } from "@react-spring/three";
+import { useSpring, config, a } from "@react-spring/web";
 export default function Home() {
   const [dpr, setDpr] = useState<number>(1);
   const [m, setM] = useState<number>(0.002);
   const pages = useRef<number>(8);
   const [isMobile, setIsMobile] = useState<boolean>(false);
-  const canvas = useRef<HTMLCanvasElement>(null);
+
   const spring = useSpring({
+    opacity: m >= 1 / 8 ? 0 : 1,
+    pointerEvents: m >= 1 / 8 ? "none" : "auto",
+  });
+
+  const scrollSpring = useSpring({
     from: {
-      color: "rgb(43, 68, 82)",
+      opacity: 0,
     },
-    to: [{ color: "rgb(178, 35, 35)" }, { color: "rgb(100, 21, 120)" }],
-    config: config.slow,
+    to: [{ opacity: 1 }, { opacity: 0 }],
+    loop: true,
+    config: {
+      duration: 1200,
+    },
   });
 
   // haqndles isMobile
@@ -68,6 +76,20 @@ export default function Home() {
     });
   }
 
+  // bg-colors
+  const bgColor = {
+    1: "bg-black",
+    2: "bg-[#001a1e]",
+    3: "bg-red-950",
+  };
+
+  // Global state for what component is being shown
+  const components = {
+    Frames: 0.1,
+    Watch: 0.2,
+  };
+  const [comp, setComp] = useState("Frames");
+
   return (
     <>
       <Head>
@@ -78,12 +100,15 @@ export default function Home() {
       <main className="selection:bg-black selection:text-blue-700">
         <div className="relative h-full w-full overflow-hidden">
           {/* Progress */}
-          <div className="pointer-events-none absolute bottom-[5%] right-[5%] z-50 text-xl font-light text-blue-300 lg:text-2xl 2xl:text-4xl">
+          <div className="pointer-events-none absolute bottom-[5%] right-[5%] z-50 text-xl font-black text-blue-300 lg:text-2xl 2xl:text-4xl">
             {Math.floor(m * 100)}%
           </div>
 
           {/* Landing page */}
-          <div className="relative z-20 flex h-screen flex-col items-center justify-around">
+          <a.div
+            className="relative z-20 flex h-screen flex-col items-center justify-around"
+            style={spring as any}
+          >
             <div></div>
             <div className="flex flex-col items-center justify-center tracking-widest ">
               <div className="text-center text-6xl font-black tracking-tight text-blue-300 md:text-8xl 2xl:text-9xl">
@@ -93,8 +118,18 @@ export default function Home() {
                 With Martnetics
               </div>
             </div>
-            <div className="text-lg font-light tracking-widest text-blue-300">
+            <a.div
+              className="text-lg font-light uppercase tracking-widest text-blue-300"
+              style={scrollSpring}
+            >
               scroll down
+            </a.div>
+          </a.div>
+
+          {/* Watch Markup */}
+          <div className="absolute left-0 top-0">
+            <div className="flex flex-col justify-center text-3xl text-white">
+              <div className="relative z-20">Product Showcase</div>
             </div>
           </div>
 
@@ -104,12 +139,15 @@ export default function Home() {
               shadows
               gl={{ powerPreference: "high-performance" }}
               dpr={dpr}
+              className={
+                "transition-colors duration-700 " +
+                bgColor[(Math.floor(m / 0.125) + 1) as keyof typeof bgColor]
+              }
             >
               <PerformanceMonitor
                 onIncline={() => setDpr(2)}
                 onDecline={() => setDpr(1)}
               />
-              <color args={[0x000000]} attach="background" />
               <Scene m={m} isMobile={isMobile} />
             </Canvas>
           </div>

@@ -51,7 +51,7 @@ const Frames = ({
   const frameIndex = useRef<number[]>([]);
   const coords = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
   const globalRef = useRef<Group>(null);
-  
+
   useEffect(() => {
     const space = 3;
     let x = (Math.sqrt(cloneRef.current.length) * space) / -2;
@@ -89,10 +89,11 @@ const Frames = ({
         state.camera.fov = 140;
         state.camera.updateProjectionMatrix();
       }
-      
+
       if (globalRef.current) {
         if (!globalRef.current.visible) {
           globalRef.current.visible = true;
+          state.scene.environment = null
         }
         globalRef.current.rotation.y = coords.current.x * 0.1;
         globalRef.current.rotation.x = coords.current.y * 0.1;
@@ -124,6 +125,8 @@ const Frames = ({
       }
     }
   });
+
+  const spring = useSpring({});
 
   return (
     <>

@@ -6,7 +6,7 @@ function Loading() {
 
 
   return (
-    <div className='flex flex-col justify-center items-center h-screen w-screen overflow-hidden bg-primary text-black text-5xl font-black'></div>
+    <div className='flex flex-col justify-center items-center h-screen w-screen overflow-hidden bg-black text-blue-300 text-5xl font-black'></div>
   )
 }
 

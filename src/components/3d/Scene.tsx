@@ -1,4 +1,4 @@
-import { useSpring } from "@react-spring/three";
+import { useSpring, a } from "@react-spring/three";
 import {
   CameraControls,
   Html,
@@ -24,7 +24,7 @@ function Perm() {
 
   return (
     <Html center>
-      <div className="flex h-screen w-screen flex-col items-center justify-center overflow-hidden bg-primary text-8xl font-black text-black">
+      <div className="flex h-screen w-screen flex-col items-center justify-center overflow-hidden bg-black text-8xl font-black text-blue-300">
         {Math.floor(progress)}
       </div>
     </Html>
@@ -34,10 +34,9 @@ function Perm() {
 export const Scene = ({ m, isMobile }: { m: number; isMobile: boolean }) => {
   const pages = useRef<number>(8);
   const camRef = useRef(null);
-  
 
   useFrame((state, dt) => {
-    if (m > 1/pages.current && m < 2/pages.current) {
+    if (m > 1 / pages.current && m < 2 / pages.current) {
       easing.damp(state.camera.position, "z", -90, 0.4, dt);
       state.camera.updateProjectionMatrix();
     } else {
@@ -57,7 +56,7 @@ export const Scene = ({ m, isMobile }: { m: number; isMobile: boolean }) => {
       <Frames start={0} end={1 / pages.current} prog={m} />
       <Watch
         start={1 / pages.current}
-        end={2 / pages.current}
+        end={8 / pages.current}
         prog={m}
         position={[0, 0, -100]}
         isMobile={isMobile}
