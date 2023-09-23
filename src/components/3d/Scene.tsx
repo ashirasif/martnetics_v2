@@ -1,4 +1,4 @@
-import { useSpring, a } from "@react-spring/three";
+import { useSpring, a, config } from "@react-spring/three";
 import {
   CameraControls,
   Html,
@@ -31,9 +31,21 @@ function Perm() {
   );
 }
 
-export const Scene = ({ m, isMobile }: { m: number; isMobile: boolean }) => {
+export const Scene = ({
+  m,
+  isMobile,
+  currentPage,
+}: {
+  m: number;
+  isMobile: boolean;
+  currentPage: number;
+}) => {
   const pages = useRef<number>(8);
   const camRef = useRef(null);
+  const cameraPosition = {
+    1: [0, 0, 10],
+    2: [0, 0, -90],
+  };
 
   useFrame((state, dt) => {
     if (m > 1 / pages.current && m < 2 / pages.current) {
@@ -49,8 +61,8 @@ export const Scene = ({ m, isMobile }: { m: number; isMobile: boolean }) => {
     <Suspense fallback={<Perm />}>
       <PerspectiveCamera
         fov={140}
-        position={[0, 0, 10]}
         makeDefault
+        position={[0,0,10]}
         ref={camRef}
       />
       <Frames start={0} end={1 / pages.current} prog={m} />

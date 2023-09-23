@@ -6,16 +6,34 @@ import { api } from "~/utils/api";
 import { Scene } from "../components/3d/Scene";
 import { useEffect, useRef, useState } from "react";
 import NavBar from "~/components/navbar";
-import { useSpring, config, a } from "@react-spring/web";
+import {
+  useSpring,
+  config,
+  a,
+  useSpringRef,
+  useChain,
+} from "@react-spring/web";
 export default function Home() {
   const [dpr, setDpr] = useState<number>(1);
   const [m, setM] = useState<number>(0.002);
   const pages = useRef<number>(8);
+  const [currentPage, setCurrentPage] = useState<number>(1)
   const [isMobile, setIsMobile] = useState<boolean>(false);
 
-  const spring = useSpring({
-    opacity: m >= 1 / 8 ? 0 : 1,
-    pointerEvents: m >= 1 / 8 ? "none" : "auto",
+  // updates current page on scroll
+  useEffect(() => {
+    setCurrentPage(Math.floor(m / (1/pages.current)) + 1)
+  }, [m])
+
+
+  const springFrame = useSpring({
+    opacity: currentPage == 1 ? 1 : 0,
+    pointerEvents: currentPage == 1 ? "auto" : "none",
+  });
+
+  const springProductShowcase = useSpring({
+    opacity: currentPage  == 2 ? 1 : 0,
+    pointerEvents: currentPage == 2 ? "auto" : "none",
   });
 
   const scrollSpring = useSpring({
@@ -51,30 +69,29 @@ export default function Home() {
   }, []);
 
   // handle wheel event on desktop
-  
-    useEffect(() => {
-      if (isMobile) {
-        window.addEventListener("scroll", (e) => {
-          setM(
-            Math.floor(
-              (window.scrollY /
-                (document.documentElement.scrollHeight - window.innerHeight)) *
-                100,
-            ),
-          );
-        });
-      } else {
-        window.addEventListener("wheel", (e) => {
-          if (
-            m + Math.sign(e.deltaY) / 100 > 0.002 &&
-            m + Math.sign(e.deltaY) / 100 <= 1
-          ) {
-            setM(m + Math.sign(e.deltaY) / 100);
-          }
-        });
 
-      }
-    });
+  useEffect(() => {
+    if (isMobile) {
+      window.addEventListener("scroll", (e) => {
+        setM(
+          Math.floor(
+            (window.scrollY /
+              (document.documentElement.scrollHeight - window.innerHeight)) *
+              100,
+          ),
+        );
+      });
+    } else {
+      window.addEventListener("wheel", (e) => {
+        if (
+          m + Math.sign(e.deltaY) / 100 > 0.002 &&
+          m + Math.sign(e.deltaY) / 100 <= 1
+        ) {
+          setM(m + Math.sign(e.deltaY) / 100);
+        }
+      });
+    }
+  });
 
   // bg-colors
   const bgColor = {
@@ -107,7 +124,7 @@ export default function Home() {
           {/* Landing page */}
           <a.div
             className="relative z-20 flex h-screen flex-col items-center justify-around"
-            style={spring as any}
+            style={springFrame as any}
           >
             <div></div>
             <div className="flex flex-col items-center justify-center tracking-widest ">
@@ -128,8 +145,14 @@ export default function Home() {
 
           {/* Watch Markup */}
           <div className="absolute left-0 top-0">
-            <div className="flex flex-col justify-center text-3xl text-white">
-              <div className="relative z-20">Product Showcase</div>
+            <div className="flex h-screen w-screen flex-col justify-center px-8 text-blue-300">
+              <a.div className="z-20" style={springProductShowcase as any}>
+                <div className="text-4xl font-black">Selling A Product</div>
+                <div className="text-xl font-light">
+                  Allow us to showcase it 🌟
+                </div>
+              </a.div> 
+              <a.div className="z-20 self-end text-lg font-light text-white/50 tracking-wide justify-self-end" style={springProductShowcase as any}>?: drag the watch around</a.div>
             </div>
           </div>
 
@@ -141,14 +164,14 @@ export default function Home() {
               dpr={dpr}
               className={
                 "transition-colors duration-700 " +
-                bgColor[(Math.floor(m / 0.125) + 1) as keyof typeof bgColor]
+                bgColor[(Math.floor(m / (1/pages.current)) + 1) as keyof typeof bgColor]
               }
             >
               <PerformanceMonitor
                 onIncline={() => setDpr(2)}
                 onDecline={() => setDpr(1)}
               />
-              <Scene m={m} isMobile={isMobile} />
+              <Scene m={m} currentPage={currentPage} isMobile={isMobile} />
             </Canvas>
           </div>
         </div>
