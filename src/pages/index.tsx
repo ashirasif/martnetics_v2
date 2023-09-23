@@ -51,30 +51,30 @@ export default function Home() {
   }, []);
 
   // handle wheel event on desktop
-  if (isMobile) {
+  
     useEffect(() => {
-      window.addEventListener("scroll", (e) => {
-        setM(
-          Math.floor(
-            (window.scrollY /
-              (document.documentElement.scrollHeight - window.innerHeight)) *
-              100,
-          ),
-        );
-      });
+      if (isMobile) {
+        window.addEventListener("scroll", (e) => {
+          setM(
+            Math.floor(
+              (window.scrollY /
+                (document.documentElement.scrollHeight - window.innerHeight)) *
+                100,
+            ),
+          );
+        });
+      } else {
+        window.addEventListener("wheel", (e) => {
+          if (
+            m + Math.sign(e.deltaY) / 100 > 0.002 &&
+            m + Math.sign(e.deltaY) / 100 <= 1
+          ) {
+            setM(m + Math.sign(e.deltaY) / 100);
+          }
+        });
+
+      }
     });
-  } else {
-    useEffect(() => {
-      window.addEventListener("wheel", (e) => {
-        if (
-          m + Math.sign(e.deltaY) / 100 > 0.002 &&
-          m + Math.sign(e.deltaY) / 100 <= 1
-        ) {
-          setM(m + Math.sign(e.deltaY) / 100);
-        }
-      });
-    });
-  }
 
   // bg-colors
   const bgColor = {
