@@ -5,7 +5,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        'primary' : '#e4a78b',
+        'primary' : '#ffffff',
       },
       fontFamily: {
         'robotomono': ['Roboto Mono', 'monospace'],

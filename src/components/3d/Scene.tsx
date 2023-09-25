@@ -13,12 +13,12 @@ import { Color } from "three";
 import Frames from "~/components/3d/Frames";
 import Watch from "~/components/3d/Watch";
 
-function Perm() {
-  // useEffect(() => {
-  //   return () => {
-  //     handleState(true);
-  //   };
-  // }, []);
+function Perm({handleState}:{handleState: (s:boolean) => void}) {
+  useEffect(() => {
+    return () => {
+      handleState(true);
+    };
+  }, []);
 
   const { progress } = useProgress();
 
@@ -35,10 +35,12 @@ export const Scene = ({
   m,
   isMobile,
   currentPage,
+  handleState
 }: {
   m: number;
   isMobile: boolean;
   currentPage: number;
+  handleState: (s:boolean) => void
 }) => {
   const pages = useRef<number>(8);
   const camRef = useRef(null);
@@ -58,7 +60,7 @@ export const Scene = ({
   });
 
   return (
-    <Suspense fallback={<Perm />}>
+    <Suspense fallback={<Perm handleState={handleState}/>}>
       <PerspectiveCamera
         fov={140}
         makeDefault

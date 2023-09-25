@@ -4,7 +4,7 @@ import { useFrame, useThree } from "@react-three/fiber";
 import { easing } from "maath";
 
 import { forwardRef, useRef, useEffect, MutableRefObject } from "react";
-import { type Mesh, type Group, Color } from "three";
+import { type Mesh, type Group, Color, MeshStandardMaterial } from "three";
 import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
 
 type GLTFResult = GLTF & {
@@ -18,6 +18,7 @@ const FrameModel = forwardRef(function FrameModel(
   cloneRef: any,
 ) {
   const { nodes } = useGLTF("/frame.gltf") as GLTFResult;
+  nodes.Plane.material = new MeshStandardMaterial()
   return (
     <>
       {Array.from({ length: props.total }).map((_, i) => {
@@ -126,19 +127,20 @@ const Frames = ({
     }
   });
 
-  const spring = useSpring({});
+
 
   return (
     <>
       <group ref={globalRef}>
         <Float rotationIntensity={1} speed={1}>
           <FrameModel total={144} ref={cloneRef} />
+          <Sparkles speed={2} size={50} scale={1000} />
         </Float>
-        <Sparkles speed={2} size={50} scale={1000} />
+        
         <directionalLight
           position={[0, 0, 20]}
-          color={"rgb(0, 29, 218)"}
-          intensity={3}
+          color={"#ffffff"}
+          intensity={0.2}
         />
       </group>
     </>

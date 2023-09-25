@@ -13,7 +13,7 @@ const NavBar = () => {
     return (
         <nav className="my-3 flex w-screen flex-row justify-between px-6 md:px-12 md:my-6 z-50 overflow-hidden">
             <div className="">
-                <a href=""><Image alt="logo" src={"/logo.png"} height={50} width={50} /></a>
+                <a href=""><Image alt="logo" className="grayscale brightness-150" src={"/logo.png"} height={50} width={50} /></a>
             </div>
             <div className="hidden md:block font-mono text-lg font-thin uppercase tracking-wider text-primary">
                 <ul className="flex flex-row gap-4">
