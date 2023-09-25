@@ -163,7 +163,6 @@ export default function Watch({
         if (!globalRef.current?.visible) {
           globalRef.current.visible = true;
           state.scene.environment = hdr;
-          console.log(state.scene.environment)
         }
         // @ts-ignore
         if (state.camera.fov != 40) {
@@ -200,7 +199,6 @@ export default function Watch({
           <pointLight intensity={400} position={[0, 6, 0]} />
           <pointLight intensity={400} position={[0, -6, 0]} />
           <pointLight intensity={400} position={[6, 1, 15]} />
-          
         </animated.group>
       </group>
     </>

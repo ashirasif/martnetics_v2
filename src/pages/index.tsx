@@ -13,19 +13,19 @@ import {
   useSpringRef,
   useChain,
 } from "@react-spring/web";
+import IntroText from "~/components/introText";
 export default function Home() {
   const [dpr, setDpr] = useState<number>(1);
   const [m, setM] = useState<number>(0.002);
   const pages = useRef<number>(8);
-  const [perm, setPerm] = useState<boolean>(false)
-  const [currentPage, setCurrentPage] = useState<number>(1)
+  const [perm, setPerm] = useState<boolean>(false);
+  const [currentPage, setCurrentPage] = useState<number>(1);
   const [isMobile, setIsMobile] = useState<boolean>(false);
 
   // updates current page on scroll
   useEffect(() => {
-    setCurrentPage(Math.floor(m / (1/pages.current)) + 1)
-  }, [m])
-
+    setCurrentPage(Math.floor(m / (1 / pages.current)) + 1);
+  }, [m]);
 
   const springFrame = useSpring({
     opacity: currentPage == 1 ? 1 : 0,
@@ -33,18 +33,23 @@ export default function Home() {
   });
 
   const springProductShowcase = useSpring({
-    opacity: currentPage  == 2 ? 1 : 0,
+    opacity: currentPage == 3 ? 1 : 0,
+    pointerEvents: currentPage == 3 ? "auto" : "none",
+  });
+
+  const springIntrotext = useSpring({
+    opacity: currentPage == 2 ? 1 : 0,
     pointerEvents: currentPage == 2 ? "auto" : "none",
   });
 
   const scrollSpring = useSpring({
     from: {
-      bottom: "-10rem"
+      bottom: "-10rem",
     },
     to: {
-      bottom: "1rem"
+      bottom: "1rem",
     },
-    config: config.wobbly
+    config: config.wobbly,
   });
 
   // haqndles isMobile
@@ -100,7 +105,6 @@ export default function Home() {
     3: "bg-red-950",
   };
 
-
   return (
     <>
       <Head>
@@ -111,7 +115,7 @@ export default function Home() {
       <main className="selection:text-blue-700">
         <div className="relative h-full w-full overflow-hidden">
           {/* Progress */}
-          <div className="pointer-events-none absolute bottom-6 right-[1rem] z-50 text-xl font-black text-white lg:text-2xl 2xl:text-4xl">
+          <div className="pointer-events-none absolute bottom-6 right-[1rem] z-50 text-xl font-light text-white lg:text-2xl 2xl:text-4xl">
             {Math.floor(m * 100)}%
           </div>
 
@@ -120,20 +124,62 @@ export default function Home() {
             className="relative z-20 flex h-screen flex-col justify-between"
             style={springFrame as any}
           >
-            <div className="flex flex-col justify-center text-white tracking-widest w-1/2">
-              <div className="text-6xl font-black tracking-tight md:text-8xl 2xl:text-9xl">
-                Add Another Dimension
+            <div className="flex flex-col justify-center px-4 tracking-widest text-white">
+              <div className="w-1/2">
+                <div className="text-6xl font-black tracking-tight md:text-8xl 2xl:text-9xl">
+                  Add Another Dimension
+                </div>
+                <div className="text-6xl font-black tracking-tight md:text-8xl 2xl:text-9xl">
+                  With Martnetics.
+                </div>
               </div>
-              <div className="text-xl font-black tracking-tight md:text-8xl">
-                With Martnetics.
+              <div className="self-end text-right text-4xl font-light text-white/50">
+                <ul>
+                  <li>
+                    <div
+                      className="transition-all duration-300 hover:text-white"
+                      onClick={() => setM(2 / pages.current)}
+                    >
+                      Projects
+                    </div>
+                  </li>
+                  <li>
+                    <div className="transition-all duration-300 hover:text-white">
+                      Blog
+                    </div>
+                  </li>
+                  <li>
+                    <div className="transition-all duration-300 hover:text-white" onClick={() => setM(1/pages.current)}>
+                      About
+                    </div>
+                  </li>
+                  <li>
+                    <div className="transition-all duration-300 hover:text-white">
+                      Contact
+                    </div>
+                  </li>
+                </ul>
               </div>
             </div>
 
-            <a.div className="text-xl font-black uppercase tracking-widest text-white pl-4 relative" style={scrollSpring}>
-              <img src="/loader_2.png" className="w-12 inline animate-spin mb-1"/>
-              <span className="pl-1">Scroll Down</span>
+            <a.div
+              className="relative pl-4 text-xl font-black uppercase tracking-widest text-white"
+              style={scrollSpring}
+            >
+              <img
+                src="/loader_2.png"
+                className="mb-1 inline w-12 animate-spin"
+              />
+              <span className="pl-1">Scroll Down Gently</span>
             </a.div>
+          </a.div>
 
+          {/* Intro Text */}
+          <a.div
+            style={springIntrotext as any}
+            className="absolute left-0 top-0 z-20"
+          >
+            <IntroText currentPage={currentPage}/>
           </a.div>
 
           {/* Watch Markup */}
@@ -144,8 +190,13 @@ export default function Home() {
                 <div className="text-xl font-light">
                   Allow us to showcase it 🌟
                 </div>
-              </a.div> 
-              <a.div className="z-20 text-base font-light text-white/50 tracking-wide" style={springProductShowcase as any}>?: drag the watch around</a.div>
+              </a.div>
+              <a.div
+                className="z-20 text-base font-light tracking-wide text-white/50"
+                style={springProductShowcase as any}
+              >
+                ?: drag the watch around
+              </a.div>
             </div>
           </div>
 
@@ -157,14 +208,22 @@ export default function Home() {
               dpr={dpr}
               className={
                 "transition-colors duration-700 " +
-                bgColor[(Math.floor(m / (1/pages.current)) + 1) as keyof typeof bgColor]
+                bgColor[
+                  (Math.floor(m / (1 / pages.current)) +
+                    1) as keyof typeof bgColor
+                ]
               }
             >
               <PerformanceMonitor
                 onIncline={() => setDpr(2)}
                 onDecline={() => setDpr(1)}
               />
-              <Scene m={m} currentPage={currentPage} isMobile={isMobile} handleState={setPerm} />
+              <Scene
+                m={m}
+                currentPage={currentPage}
+                isMobile={isMobile}
+                handleState={setPerm}
+              />
             </Canvas>
           </div>
         </div>

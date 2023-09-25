@@ -18,7 +18,7 @@ const FrameModel = forwardRef(function FrameModel(
   cloneRef: any,
 ) {
   const { nodes } = useGLTF("/frame.gltf") as GLTFResult;
-  nodes.Plane.material = new MeshStandardMaterial()
+  nodes.Plane.material = new MeshStandardMaterial();
   return (
     <>
       {Array.from({ length: props.total }).map((_, i) => {
@@ -94,7 +94,7 @@ const Frames = ({
       if (globalRef.current) {
         if (!globalRef.current.visible) {
           globalRef.current.visible = true;
-          state.scene.environment = null
+          state.scene.environment = null;
         }
         globalRef.current.rotation.y = coords.current.x * 0.1;
         globalRef.current.rotation.x = coords.current.y * 0.1;
@@ -127,16 +127,14 @@ const Frames = ({
     }
   });
 
-
-
   return (
     <>
       <group ref={globalRef}>
         <Float rotationIntensity={1} speed={1}>
           <FrameModel total={144} ref={cloneRef} />
-          <Sparkles speed={2} size={50} scale={1000} />
         </Float>
-        
+        <Sparkles speed={2} size={50} scale={1000} />
+
         <directionalLight
           position={[0, 0, 20]}
           color={"#ffffff"}
