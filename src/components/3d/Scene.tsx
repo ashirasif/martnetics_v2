@@ -1,6 +1,7 @@
 import { useSpring, a, config } from "@react-spring/three";
 import {
   CameraControls,
+  Float,
   Html,
   PerspectiveCamera,
   Sparkles,
@@ -17,6 +18,7 @@ import Watch from "~/components/3d/Watch";
 function Perm({ handleState }: { handleState: (s: boolean) => void }) {
   useEffect(() => {
     return () => {
+      console.log("Perm unmounted");
       handleState(true);
     };
   }, []);
@@ -83,7 +85,9 @@ export const Scene = ({
         position={[0, 0, 100]}
         ref={camRef}
       />
-      <Sparkles speed={2} size={50} scale={1000} />
+      <Float>
+        <Sparkles speed={2} size={50} scale={1000} />
+      </Float>
       <Frames start={0} end={1 / pages.current} prog={m} />
       <Watch
         start={2 / pages.current}

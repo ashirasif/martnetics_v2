@@ -114,91 +114,98 @@ export default function Home() {
       </Head>
       <main className="selection:text-blue-700">
         <div className="relative h-full w-full overflow-hidden">
-          {/* Progress */}
-          <div className="pointer-events-none absolute bottom-6 right-[1rem] z-50 text-xl font-light text-white lg:text-2xl 2xl:text-4xl">
-            {Math.floor(m * 100)}%
-          </div>
-
-          {/* Landing page */}
-          <a.div
-            className="relative z-20 flex h-screen flex-col justify-between"
-            style={springFrame as any}
-          >
-            <div className="flex flex-col justify-center px-4 tracking-widest text-white">
-              <div className="w-1/2">
-                <div className="text-6xl font-black tracking-tight md:text-8xl 2xl:text-9xl">
-                  Add Another Dimension
-                </div>
-                <div className="text-6xl font-black tracking-tight md:text-8xl 2xl:text-9xl">
-                  With Martnetics.
-                </div>
+          {perm ? (
+            <>
+              {/* Progress */}
+              <div className="pointer-events-none absolute bottom-6 right-[1rem] z-50 text-xl font-light text-white lg:text-2xl 2xl:text-4xl">
+                {Math.floor(m * 100)}%
               </div>
-              <div className="self-end text-right text-4xl font-light text-white/50">
-                <ul>
-                  <li>
-                    <div
-                      className="transition-all duration-300 hover:text-white"
-                      onClick={() => setM(2 / pages.current)}
-                    >
-                      Projects
-                    </div>
-                  </li>
-                  <li>
-                    <div className="transition-all duration-300 hover:text-white">
-                      Blog
-                    </div>
-                  </li>
-                  <li>
-                    <div className="transition-all duration-300 hover:text-white" onClick={() => setM(1/pages.current)}>
-                      About
-                    </div>
-                  </li>
-                  <li>
-                    <div className="transition-all duration-300 hover:text-white">
-                      Contact
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
 
-            <a.div
-              className="relative pl-4 text-xl font-black uppercase tracking-widest text-white"
-              style={scrollSpring}
-            >
-              <img
-                src="/loader_2.png"
-                className="mb-1 inline w-12 animate-spin"
-              />
-              <span className="pl-1">Scroll Down Gently</span>
-            </a.div>
-          </a.div>
-
-          {/* Intro Text */}
-          <a.div
-            style={springIntrotext as any}
-            className="absolute left-0 top-0 z-20"
-          >
-            <IntroText currentPage={currentPage}/>
-          </a.div>
-
-          {/* Watch Markup */}
-          <div className="absolute left-0 top-0">
-            <div className="flex h-screen flex-col justify-center px-8 text-blue-300">
-              <a.div className="z-20" style={springProductShowcase as any}>
-                <div className="text-4xl font-black">Selling A Product</div>
-                <div className="text-xl font-light">
-                  Allow us to showcase it 🌟
-                </div>
-              </a.div>
+              {/* Landing page */}
               <a.div
-                className="z-20 text-base font-light tracking-wide text-white/50"
-                style={springProductShowcase as any}
+                className="relative z-20 flex h-screen flex-col justify-between"
+                style={springFrame as any}
               >
-                ?: drag the watch around
+                <div className="flex flex-col justify-center px-4 tracking-widest text-white">
+                  <div className="w-1/2">
+                    <div className="text-6xl font-black tracking-tight md:text-8xl 2xl:text-9xl">
+                      Add Another Dimension
+                    </div>
+                    <div className="text-6xl font-black tracking-tight md:text-8xl 2xl:text-9xl">
+                      With Martnetics.
+                    </div>
+                  </div>
+                  <div className="self-end text-right text-4xl font-light text-white/50">
+                    <ul>
+                      <li>
+                        <div
+                          className="transition-all duration-300 hover:text-white"
+                          onClick={() => setM(2 / pages.current)}
+                        >
+                          Projects
+                        </div>
+                      </li>
+                      <li>
+                        <div className="transition-all duration-300 hover:text-white">
+                          Blog
+                        </div>
+                      </li>
+                      <li>
+                        <div
+                          className="transition-all duration-300 hover:text-white"
+                          onClick={() => setM(1 / pages.current)}
+                        >
+                          About
+                        </div>
+                      </li>
+                      <li>
+                        <div className="transition-all duration-300 hover:text-white">
+                          Contact
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+                <a.div
+                  className="relative pl-4 text-xl font-black uppercase tracking-widest text-white"
+                  style={scrollSpring}
+                >
+                  <img
+                    src="/loader_2.png"
+                    className="mb-1 inline w-12 animate-spin"
+                  />
+                  <span className="pl-1">Scroll Down Gently</span>
+                </a.div>
               </a.div>
-            </div>
-          </div>
+
+              {/* Intro Text */}
+              <a.div
+                style={springIntrotext as any}
+                className="absolute left-0 top-0 z-20"
+              >
+                <IntroText currentPage={currentPage} />
+              </a.div>
+
+              {/* Watch Markup */}
+              <div className="absolute left-0 top-0">
+                <div className="flex h-screen flex-col justify-center px-8 text-blue-300">
+                  <a.div className="z-20" style={springProductShowcase as any}>
+                    <div className="text-4xl font-black">Selling A Product</div>
+                    <div className="text-xl font-light">
+                      Allow us to showcase it 🌟
+                    </div>
+                  </a.div>
+                  <a.div
+                    className="z-20 text-base font-light tracking-wide text-white/50"
+                    style={springProductShowcase as any}
+                  >
+                    ?: drag the watch around
+                  </a.div>
+                </div>
+              </div>
+            </>
+          ) : null}
 
           {/* R3F Canvas */}
           <div className="fixed left-0 top-0 h-screen w-full">
