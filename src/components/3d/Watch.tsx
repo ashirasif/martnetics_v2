@@ -185,7 +185,11 @@ export default function Watch({
   return (
     <>
       <group ref={globalRef} position={position}>
-        <PresentationControls enabled={isMobile ? false : true} snap={true}>
+        <PresentationControls
+          enabled={isMobile ? false : true}
+          snap={true}
+          cursor={false}
+        >
           <Model position={[0, 0, 0]} scale={15} isMobile={isMobile} />
           <ContactShadows
             position={[0, -1, 0]}

@@ -4,7 +4,13 @@ import { useFrame, useThree } from "@react-three/fiber";
 import { easing } from "maath";
 
 import { forwardRef, useRef, useEffect, MutableRefObject } from "react";
-import { type Mesh, type Group, Color, MeshStandardMaterial } from "three";
+import {
+  type Mesh,
+  type Group,
+  Color,
+  MeshStandardMaterial,
+  DirectionalLight,
+} from "three";
 import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
 
 type GLTFResult = GLTF & {
@@ -18,7 +24,10 @@ const FrameModel = forwardRef(function FrameModel(
   cloneRef: any,
 ) {
   const { nodes } = useGLTF("/frame.gltf") as GLTFResult;
-  nodes.Plane.material = new MeshStandardMaterial();
+  nodes.Plane.material = new MeshStandardMaterial({
+    metalness: 1,
+    roughness: 0.4,
+  });
   return (
     <>
       {Array.from({ length: props.total }).map((_, i) => {
@@ -52,6 +61,7 @@ const Frames = ({
   const frameIndex = useRef<number[]>([]);
   const coords = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
   const globalRef = useRef<Group>(null);
+  const dlRef = useRef<DirectionalLight>(null);
 
   useEffect(() => {
     const space = 3;
@@ -96,8 +106,14 @@ const Frames = ({
           globalRef.current.visible = true;
           state.scene.environment = null;
         }
-        globalRef.current.rotation.y = coords.current.x * 0.1;
-        globalRef.current.rotation.x = coords.current.y * 0.1;
+        // globalRef.current.rotation.y = coords.current.x * 0.1;
+        // globalRef.current.rotation.x = coords.current.y * 0.1;
+        easing.damp3(
+          dlRef.current!.position,
+          [coords.current.x, -coords.current.y, 2],
+          0.2,
+          dt,
+        );
         if (frameIndex.current.length == 0) {
           pos.current.push(Math.random() * 7);
           frameIndex.current.push(
@@ -134,11 +150,12 @@ const Frames = ({
           <FrameModel total={144} ref={cloneRef} />
         </Float>
         <Sparkles speed={2} size={50} scale={1000} />
-
+        <ambientLight intensity={0.2}/>
         <directionalLight
           position={[0, 0, 20]}
           color={"#ffffff"}
           intensity={0.2}
+          ref={dlRef}
         />
       </group>
     </>

@@ -14,18 +14,33 @@ import {
   useChain,
 } from "@react-spring/web";
 import IntroText from "~/components/introText";
+
 export default function Home() {
   const [dpr, setDpr] = useState<number>(1);
   const [m, setM] = useState<number>(0.002);
-  const pages = useRef<number>(8);
+  const pages = useRef<number>(10);
   const [perm, setPerm] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [isMobile, setIsMobile] = useState<boolean>(false);
-
+  const cursorRef = useRef<HTMLDivElement>(null);
   // updates current page on scroll
   useEffect(() => {
     setCurrentPage(Math.floor(m / (1 / pages.current)) + 1);
   }, [m]);
+
+  // updates cursor position with mouse-move
+  const positionElement = (e: any) => {
+    const mouseY = e.clientY;
+    const mouseX = e.clientX;
+    if (!cursorRef.current) {
+      return;
+    }
+    cursorRef.current.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
+  };
+  useEffect(() => {
+    window.addEventListener("mousemove", positionElement);
+    return () => window.removeEventListener("mousemove", positionElement);
+  });
 
   const springFrame = useSpring({
     opacity: currentPage == 1 ? 1 : 0,
@@ -33,13 +48,19 @@ export default function Home() {
   });
 
   const springProductShowcase = useSpring({
-    opacity: currentPage == 3 ? 1 : 0,
-    pointerEvents: currentPage == 3 ? "auto" : "none",
+    opacity: currentPage == 4 ? 1 : 0,
+    left: currentPage == 4 ? "0" : "-100vw",
+    pointerEvents: currentPage == 4 ? "auto" : "none",
+    config: {
+      mass: 1,
+      tension: 200,
+      friction: 80,
+    },
   });
 
   const springIntrotext = useSpring({
-    opacity: currentPage == 2 ? 1 : 0,
-    pointerEvents: currentPage == 2 ? "auto" : "none",
+    opacity: [2, 3].includes(currentPage) ? 1 : 0,
+    pointerEvents: [2, 3].includes(currentPage) ? "auto" : "none",
   });
 
   const scrollSpring = useSpring({
@@ -50,6 +71,11 @@ export default function Home() {
       bottom: "1rem",
     },
     config: config.wobbly,
+  });
+
+  const springLogo = useSpring({
+    top: currentPage > 1 ? "1.5rem" : "-20vh",
+    config: config.gentle,
   });
 
   // haqndles isMobile
@@ -89,10 +115,10 @@ export default function Home() {
     } else {
       window.addEventListener("wheel", (e) => {
         if (
-          m + Math.sign(e.deltaY) / 100 > 0.002 &&
-          m + Math.sign(e.deltaY) / 100 <= 1
+          m + Math.sign(e.deltaY) / 100 * 1.5 > 0.002 &&
+          m + Math.sign(e.deltaY) / 100 * 1.5 <= 1
         ) {
-          setM(m + Math.sign(e.deltaY) / 100);
+          setM(m + Math.sign(e.deltaY) / 100 * 1.5);
         }
       });
     }
@@ -101,8 +127,9 @@ export default function Home() {
   // bg-colors
   const bgColor = {
     1: "bg-black",
-    2: "bg-[#001a1e]",
-    3: "bg-red-950",
+    2: "bg-[#091517]",
+    3: "bg-[#110814]",
+    4: "bg-[#001a1e]",
   };
 
   return (
@@ -117,9 +144,26 @@ export default function Home() {
           {perm ? (
             <>
               {/* Progress */}
-              <div className="pointer-events-none absolute bottom-6 right-[1rem] z-50 text-xl font-light text-white lg:text-2xl 2xl:text-4xl">
+              <div className="pointer-events-none absolute bottom-6 right-4 z-50 text-xl font-light text-white lg:text-2xl 2xl:text-4xl">
                 {Math.floor(m * 100)}%
               </div>
+
+              {/* Cursor */}
+              <div
+                ref={cursorRef}
+                className="absolute top-0 z-50 h-8 w-8 rounded-full bg-white"
+              />
+
+              {/* Logo */}
+              <a.div
+                className="absolute left-6 top-6 z-30 w-20 brightness-200"
+                style={springLogo}
+                onClick={() => {
+                  setM(0.002);
+                }}
+              >
+                <img src="/logo.png" alt="logo" className="object-contain" />
+              </a.div>
 
               {/* Landing page */}
               <a.div
@@ -135,7 +179,7 @@ export default function Home() {
                       With Martnetics.
                     </div>
                   </div>
-                  <div className="self-end text-right text-4xl font-light text-white/50">
+                  <div className="self-end text-right text-4xl font-light text-white/70">
                     <ul>
                       <li>
                         <div
@@ -189,15 +233,18 @@ export default function Home() {
 
               {/* Watch Markup */}
               <div className="absolute left-0 top-0">
-                <div className="flex h-screen flex-col justify-center px-8 text-blue-300">
-                  <a.div className="z-20" style={springProductShowcase as any}>
-                    <div className="text-4xl font-black">Selling A Product</div>
-                    <div className="text-xl font-light">
+                <div className="flex h-screen flex-col justify-center px-8 text-white">
+                  <a.div
+                    className="relative z-20"
+                    style={springProductShowcase as any}
+                  >
+                    <div className="text-6xl font-black">Selling A Product</div>
+                    <div className="pt-2 text-2xl font-light">
                       Allow us to showcase it 🌟
                     </div>
                   </a.div>
                   <a.div
-                    className="z-20 text-base font-light tracking-wide text-white/50"
+                    className="relative z-20 text-lg font-light tracking-wide text-white/50"
                     style={springProductShowcase as any}
                   >
                     ?: drag the watch around

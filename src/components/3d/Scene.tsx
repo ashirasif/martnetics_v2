@@ -14,6 +14,7 @@ import { Color } from "three";
 
 import Frames from "~/components/3d/Frames";
 import Watch from "~/components/3d/Watch";
+import Testimony from "./testimony";
 
 function Perm({ handleState }: { handleState: (s: boolean) => void }) {
   useEffect(() => {
@@ -45,17 +46,19 @@ export const Scene = ({
   currentPage: number;
   handleState: (s: boolean) => void;
 }) => {
-  const pages = useRef<number>(8);
+  const pages = useRef<number>(10);
   const camRef = useRef(null);
   const cameraPosition = {
     1: [0, 0, 10],
     2: [0, 0, 100],
-    3: [0, 0, -90],
+    3: [0, 0, 50],
     4: [0, 0, -90],
     5: [0, 0, -90],
     6: [0, 0, -90],
     7: [0, 0, -90],
     8: [0, 0, -90],
+    9: [0, 0, -90],
+    10: [0, 0, -90],
   };
 
   useFrame((state, dt) => {
@@ -85,17 +88,18 @@ export const Scene = ({
         position={[0, 0, 100]}
         ref={camRef}
       />
-      <Float>
+      <Float rotationIntensity={0}>
         <Sparkles speed={2} size={50} scale={1000} />
       </Float>
       <Frames start={0} end={1 / pages.current} prog={m} />
       <Watch
-        start={2 / pages.current}
-        end={8 / pages.current}
+        start={3 / pages.current}
+        end={4 / pages.current}
         prog={m}
         position={[0, 0, -100]}
         isMobile={isMobile}
       />
+      <Testimony start={4} end={5} prog={m} position={[0, -100, 0]} isMobile={isMobile}/>
     </Suspense>
   );
 };
