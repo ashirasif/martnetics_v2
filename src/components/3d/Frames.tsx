@@ -94,12 +94,6 @@ const Frames = ({
 
   useFrame((state, dt) => {
     if (prog >= start && prog < end) {
-      // @ts-ignore
-      if (state.camera.fov != 140) {
-        // @ts-ignore
-        state.camera.fov = 140;
-        state.camera.updateProjectionMatrix();
-      }
 
       if (globalRef.current) {
         if (!globalRef.current.visible) {
@@ -140,6 +134,7 @@ const Frames = ({
       if (globalRef.current?.visible) {
         globalRef.current.visible = false;
       }
+      
     }
   });
 

@@ -14,6 +14,7 @@ import {
   useChain,
 } from "@react-spring/web";
 import IntroText from "~/components/introText";
+import Image from "next/image";
 
 export default function Home() {
   const [dpr, setDpr] = useState<number>(1);
@@ -54,13 +55,25 @@ export default function Home() {
     config: {
       mass: 1,
       tension: 200,
-      friction: 80,
+      friction: 30,
     },
   });
 
   const springIntrotext = useSpring({
     opacity: [2, 3].includes(currentPage) ? 1 : 0,
     pointerEvents: [2, 3].includes(currentPage) ? "auto" : "none",
+  });
+
+  const springWatchSpecs = useSpring({
+    opacity: currentPage == 5 ? 1 : 0,
+    left: currentPage == 5 ? "15vw" : "-100vw",
+    pointerEvents: currentPage == 5 ? "auto" : "none",
+    config: config.default,
+  });
+
+  const springTestimonials = useSpring({
+    opacity: currentPage == 6 ? 1 : 0,
+    pointerEvents: currentPage == 6 ? "auto" : "none",
   });
 
   const scrollSpring = useSpring({
@@ -115,10 +128,10 @@ export default function Home() {
     } else {
       window.addEventListener("wheel", (e) => {
         if (
-          m + Math.sign(e.deltaY) / 100 * 1.5 > 0.002 &&
-          m + Math.sign(e.deltaY) / 100 * 1.5 <= 1
+          m + (Math.sign(e.deltaY) / 100) * 1.5 > 0.002 &&
+          m + (Math.sign(e.deltaY) / 100) * 1.5 <= 1
         ) {
-          setM(m + Math.sign(e.deltaY) / 100 * 1.5);
+          setM(m + (Math.sign(e.deltaY) / 100) * 1.5);
         }
       });
     }
@@ -130,6 +143,12 @@ export default function Home() {
     2: "bg-[#091517]",
     3: "bg-[#110814]",
     4: "bg-[#001a1e]",
+    5: "bg-black",
+    6: "bg-gray-950",
+    7: "bg-black",
+    8: "bg-black",
+    9: "bg-black",
+    10: "bg-black",
   };
 
   return (
@@ -151,18 +170,27 @@ export default function Home() {
               {/* Cursor */}
               <div
                 ref={cursorRef}
-                className="absolute top-0 z-50 h-8 w-8 rounded-full bg-white"
+                className="absolute top-0 z-50 h-8 w-8 rounded-full bg-white/75 bg-blend-color"
               />
 
               {/* Logo */}
               <a.div
-                className="absolute left-6 top-6 z-30 w-20 brightness-200"
+                className="absolute left-6 top-6 z-30 brightness-200"
                 style={springLogo}
                 onClick={() => {
                   setM(0.002);
                 }}
               >
-                <img src="/logo.png" alt="logo" className="object-contain" />
+                <Image
+                  src="/logo.png"
+                  alt="logo"
+                  width={100}
+                  height={100}
+                  className="object-contain"
+                />
+                <span className="absolute left-[110px] top-0 text-xl font-light tracking-widest text-white">
+                  DESIGN HOUSE
+                </span>
               </a.div>
 
               {/* Landing page */}
@@ -240,7 +268,7 @@ export default function Home() {
                   >
                     <div className="text-6xl font-black">Selling A Product</div>
                     <div className="pt-2 text-2xl font-light">
-                      Allow us to showcase it 🌟
+                      Allow us to showcase it ⌚
                     </div>
                   </a.div>
                   <a.div
@@ -251,6 +279,40 @@ export default function Home() {
                   </a.div>
                 </div>
               </div>
+
+              {/* Watch Specs */}
+              <a.div
+                className="absolute top-0 z-20"
+                style={springWatchSpecs as any}
+              >
+                <div className="flex h-screen flex-col justify-center text-lg tracking-wider text-white">
+                  <div className="text-3xl font-black">- Specs</div>
+                  <div>- Will make your wrist as cold as the South Pole 🥶</div>
+                  <div>- Impressed women guaranteed 💖</div>
+                  <div>- Tells the time just fine ⌛</div>
+                </div>
+              </a.div>
+
+              {/* Testimonials */}
+              <a.div
+                className={"absolute left-0 top-0 z-20"}
+                style={springTestimonials as any}
+              >
+                <div className="flex h-screen w-screen flex-col justify-center">
+                  <div className="self-center text-4xl font-black text-white">
+                    People Said
+                  </div>
+                  <div className="flex flex-row items-center justify-around pt-4">
+                    <div className="rounded-full bg-white p-4 text-2xl transition-all duration-300 hover:bg-black hover:text-white">
+                      &lt;
+                    </div>
+                    <div className="text-white"></div>
+                    <div className="rounded-full bg-white p-4 text-2xl transition-all duration-300 hover:bg-black hover:text-white">
+                      &gt;
+                    </div>
+                  </div>
+                </div>
+              </a.div>
             </>
           ) : null}
 

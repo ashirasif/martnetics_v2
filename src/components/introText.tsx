@@ -36,7 +36,7 @@ function IntroText({ currentPage }: { currentPage: number }) {
           others, we don't simply create a website for you and stop there. We
           are committed to making your product stand out with our expertise. We
           work with an affordable plan tailored to your needs until you can
-          visibly witness an increase in sales.
+          visibly witness an increase in sales. 🗿
         </div>
       </div>
       <div className="absolute left-[200vw] top-0 flex h-screen w-screen flex-col items-center justify-center text-center text-white">

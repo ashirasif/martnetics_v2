@@ -1,6 +1,6 @@
-import * as THREE from "three";
 import React, { useRef, useState, useEffect } from "react";
 import {
+  CameraShake,
   ContactShadows,
   Environment,
   Html,
@@ -13,7 +13,7 @@ import {
 import { GLTF } from "three-stdlib";
 import { extend, useFrame, useThree } from "@react-three/fiber";
 import { easing } from "maath";
-import { useSpring, animated } from "@react-spring/three";
+import { useSpring, config, animated } from "@react-spring/three";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -41,15 +41,11 @@ type GLTFResult = GLTF & {
   };
 };
 
-type ContextType = Record<
-  string,
-  React.ForwardRefExoticComponent<JSX.IntrinsicElements["mesh"]>
->;
-
 function Model(props: {
   position: [x: number, y: number, z: number];
   scale: number;
   isMobile?: boolean;
+  currentPage: number;
 }) {
   const { nodes, materials } = useGLTF("/watch.gltf") as GLTFResult;
   const spring = useSpring({
@@ -62,11 +58,34 @@ function Model(props: {
     loop: true,
     config: { duration: 4000 },
   });
+
+  const [springPage5, api] = useSpring(() => ({
+    from: {
+      rotation: [0, 0, 0],
+    },
+    config: config.gentle,
+  }));
+
+  useEffect(() => {
+    console.log(props.currentPage);
+    if (props.currentPage == 4) {
+      props.isMobile
+        ? api.start({
+            to: { rotation: [0, 2 * Math.PI, 0] },
+            loop: true,
+            config: { duration: 4000 },
+          })
+        : api.start({ to: { rotation: [0, 0, 0] } });
+    } else {
+      api.start({ to: { rotation: [-0.1, Math.PI / 8, 0] } });
+    }
+  }, [props.currentPage]);
+
   return (
     <animated.group
       scale={props.scale}
       position={props.position}
-      rotation={props.isMobile ? (spring.rotation as any) : [0, 0, 0]}
+      rotation={springPage5.rotation as any}
       dispose={null}
     >
       <mesh castShadow geometry={nodes.Circle.geometry}>
@@ -134,12 +153,14 @@ export default function Watch({
   prog,
   position,
   isMobile,
+  currentPage,
 }: {
   start: number;
   end: number;
   prog: number;
   position: [number, number, number];
   isMobile: boolean;
+  currentPage: number;
 }) {
   const globalRef = useRef<THREE.Group>(null);
   const dlRef = useRef<THREE.Group>(null);
@@ -163,6 +184,7 @@ export default function Watch({
         if (!globalRef.current?.visible) {
           globalRef.current.visible = true;
           state.scene.environment = hdr;
+          dlRef.current.visible = true;
         }
         // @ts-ignore
         if (state.camera.fov != 40) {
@@ -170,13 +192,18 @@ export default function Watch({
           state.camera.fov = 40;
           state.camera.updateProjectionMatrix();
         }
-        dlRef.current.visible = true;
       }
     } else {
       if (globalRef.current?.visible) {
         if (dlRef.current) {
           dlRef.current.visible = false;
           globalRef.current.visible = false;
+        }
+        // @ts-ignore
+        if (state.camera.fov != 140) {
+          // @ts-ignore
+          state.camera.fov = 140;
+          state.camera.updateProjectionMatrix();
         }
       }
     }
@@ -186,11 +213,16 @@ export default function Watch({
     <>
       <group ref={globalRef} position={position}>
         <PresentationControls
-          enabled={isMobile ? false : true}
+          enabled={isMobile || currentPage != 4 ? false : true}
           snap={true}
           cursor={false}
         >
-          <Model position={[0, 0, 0]} scale={15} isMobile={isMobile} />
+          <Model
+            currentPage={currentPage}
+            position={[0, 0, 0]}
+            scale={15}
+            isMobile={isMobile}
+          />
           <ContactShadows
             position={[0, -1, 0]}
             opacity={0.75}
