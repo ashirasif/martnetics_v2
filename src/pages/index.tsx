@@ -15,6 +15,7 @@ import {
 } from "@react-spring/web";
 import IntroText from "~/components/introText";
 import Image from "next/image";
+import Testimonial from "~/components/testimonial";
 
 export default function Home() {
   const [dpr, setDpr] = useState<number>(1);
@@ -36,7 +37,7 @@ export default function Home() {
     if (!cursorRef.current) {
       return;
     }
-    cursorRef.current.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
+    cursorRef.current.style.transform = `translate3d(${mouseX-15}px, ${mouseY-15}px, 0)`;
   };
   useEffect(() => {
     window.addEventListener("mousemove", positionElement);
@@ -144,7 +145,7 @@ export default function Home() {
     3: "bg-[#110814]",
     4: "bg-[#001a1e]",
     5: "bg-black",
-    6: "bg-gray-950",
+    6: "bg-rose-950",
     7: "bg-black",
     8: "bg-black",
     9: "bg-black",
@@ -170,7 +171,7 @@ export default function Home() {
               {/* Cursor */}
               <div
                 ref={cursorRef}
-                className="absolute top-0 z-50 h-8 w-8 rounded-full bg-white/75 bg-blend-color"
+                className={"absolute pointer-events-none top-0 z-50 h-8 w-8 rounded-full bg-white/75 bg-blend-color" + (isMobile ? " hidden": "")}
               />
 
               {/* Logo */}
@@ -243,9 +244,12 @@ export default function Home() {
                   className="relative pl-4 text-xl font-black uppercase tracking-widest text-white"
                   style={scrollSpring}
                 >
-                  <img
+                  <Image
                     src="/loader_2.png"
                     className="mb-1 inline w-12 animate-spin"
+                    width={20}
+                    height={20}
+                    alt="loader"
                   />
                   <span className="pl-1">Scroll Down Gently</span>
                 </a.div>
@@ -266,13 +270,13 @@ export default function Home() {
                     className="relative z-20"
                     style={springProductShowcase as any}
                   >
-                    <div className="text-6xl font-black">Selling A Product</div>
+                    <div className="text-5xl font-black">Selling A Product</div>
                     <div className="pt-2 text-2xl font-light">
                       Allow us to showcase it ⌚
                     </div>
                   </a.div>
                   <a.div
-                    className="relative z-20 text-lg font-light tracking-wide text-white/50"
+                    className="relative z-20 text-lg font-light tracking-wide text-white/70"
                     style={springProductShowcase as any}
                   >
                     ?: drag the watch around
@@ -298,19 +302,11 @@ export default function Home() {
                 className={"absolute left-0 top-0 z-20"}
                 style={springTestimonials as any}
               >
-                <div className="flex h-screen w-screen flex-col justify-center">
+                <div className="flex h-screen w-screen flex-col justify-evenly">
                   <div className="self-center text-4xl font-black text-white">
                     People Said
                   </div>
-                  <div className="flex flex-row items-center justify-around pt-4">
-                    <div className="rounded-full bg-white p-4 text-2xl transition-all duration-300 hover:bg-black hover:text-white">
-                      &lt;
-                    </div>
-                    <div className="text-white"></div>
-                    <div className="rounded-full bg-white p-4 text-2xl transition-all duration-300 hover:bg-black hover:text-white">
-                      &gt;
-                    </div>
-                  </div>
+                    <Testimonial/>
                 </div>
               </a.div>
             </>

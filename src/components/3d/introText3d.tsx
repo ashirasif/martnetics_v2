@@ -29,7 +29,7 @@ function IntroText3d({
       meshRef.current!.material.color = color.set("#ffe033");
     } else {
       // @ts-ignore
-      meshRef.current!.material.color = color.set("#4c80d4");
+      meshRef.current!.material.color = color.set("#ff8ce6");
     }
   }, [prog]);
 
