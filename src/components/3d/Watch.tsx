@@ -67,7 +67,6 @@ function Model(props: {
   }));
 
   useEffect(() => {
-    console.log(props.currentPage);
     if (props.currentPage == 4) {
       props.isMobile
         ? api.start({

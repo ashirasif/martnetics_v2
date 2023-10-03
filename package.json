@@ -11,6 +11,9 @@
     "start": "next start"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.4.2",
+    "@fortawesome/free-brands-svg-icons": "^6.4.2",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "@prisma/client": "^5.1.1",
     "@react-spring/three": "^9.7.3",
     "@react-spring/web": "^9.7.3",
@@ -22,6 +25,7 @@
     "@trpc/next": "^10.37.1",
     "@trpc/react-query": "^10.37.1",
     "@trpc/server": "^10.37.1",
+    "@use-gesture/react": "^10.3.0",
     "maath": "^0.7.0",
     "next": "^13.4.19",
     "react": "18.2.0",

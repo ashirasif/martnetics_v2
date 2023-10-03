@@ -51,8 +51,8 @@ export const Scene = ({
   const camRef = useRef(null);
   const cameraPosition = {
     1: [0, 0, 10],
-    2: [0, 0, 100],
-    3: [0, 0, 50],
+    2: [100, 0, -90],
+    3: [100, 0, -140],
     4: [0, 0.5, -90],
     5: [-2, 0.5, -93],
     6: [0, 0, 100],
@@ -72,7 +72,7 @@ export const Scene = ({
         [
           cameraPosition[currentPage as keyof typeof cameraPosition][0]!,
           cameraPosition[currentPage as keyof typeof cameraPosition][1]!,
-          cameraPosition[currentPage as keyof typeof cameraPosition][2]!,
+          cameraPosition[currentPage as keyof typeof cameraPosition][2]! + (isMobile ? 10: 0),
         ],
         0.4,
         dt,
@@ -94,7 +94,7 @@ export const Scene = ({
         start={1 / pages.current}
         end={3 / pages.current}
         prog={m}
-        position={[0, 0, 90]}
+        position={[100, 0, -100]}
         isMobile={isMobile}
       />
       <Watch
@@ -105,14 +105,6 @@ export const Scene = ({
         isMobile={isMobile}
         currentPage={currentPage}
       />
-      {/* <Testimony
-        start={5 / pages.current}
-        end={6 / pages.current}
-        prog={m}
-        position={[50, 0, -100]}
-        isMobile={isMobile}
-        <Sparkles speed={2} size={50} scale={1000} />
-      /> */}
       <Float>
         <Sparkles noise={0} size={50} scale={1000} />
       </Float>

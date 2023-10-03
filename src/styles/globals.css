@@ -5,3 +5,7 @@
 body {
   cursor: none;
 }
+
+.drag {
+  touch-action: none;
+}
