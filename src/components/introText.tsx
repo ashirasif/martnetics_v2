@@ -41,7 +41,7 @@ function IntroText({ currentPage }: { currentPage: number }) {
       </div>
       <div className="absolute left-[200vw] top-0 flex h-screen w-screen flex-col items-center justify-center text-center text-white">
         <div className="text-6xl font-black">Our recipe</div>
-        <div className="w-2/3 pt-2 text-3xl font-light">
+        <div className="w-2/3 pt-2 text-2xl lg:text-3xl font-light">
           Developers on 🚬 + Artists on ☕ = 🔥
         </div>
       </div>

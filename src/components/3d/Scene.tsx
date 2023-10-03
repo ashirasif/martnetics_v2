@@ -14,7 +14,7 @@ import { Color } from "three";
 
 import Frames from "~/components/3d/Frames";
 import Watch from "~/components/3d/Watch";
-import Testimony from "./testimony";
+
 import IntroText3d from "./introText3d";
 
 function Perm({ handleState }: { handleState: (s: boolean) => void }) {
@@ -47,7 +47,7 @@ export const Scene = ({
   currentPage: number;
   handleState: (s: boolean) => void;
 }) => {
-  const pages = useRef<number>(10);
+  const pages = useRef<number>(8);
   const camRef = useRef(null);
   const cameraPosition = {
     1: [0, 0, 10],
@@ -55,8 +55,8 @@ export const Scene = ({
     3: [0, 0, 50],
     4: [0, 0.5, -90],
     5: [-2, 0.5, -93],
-    6: [50, 0, -80],
-    7: [0, 0, -90],
+    6: [0, 0, 100],
+    7: [0, 0, 50],
     8: [0, 0, -90],
     9: [0, 0, -90],
     10: [0, 0, -90],
