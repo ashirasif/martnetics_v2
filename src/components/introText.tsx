@@ -26,9 +26,9 @@ function IntroText({ currentPage }: { currentPage: number }) {
 
   return (
     <a.div className="absolute top-0" style={springLeftToRight}>
-      <div className="absolute left-[100vw] px-4 top-0 flex h-screen w-screen flex-col items-center justify-center text-center text-white">
+      <div className="absolute left-[100vw] px-4 top-0 flex h-screen w-screen flex-col md:items-center justify-center text-left md:text-center text-white">
         <div className="text-6xl font-black">Who are we?</div>
-        <div className="md:w-2/3 pt-2 text-xl font-light">
+        <div className="md:w-2/3 pt-2 text-base font-normal">
           At Martnetics, we are more than just a design house; we are the
           architects of immersive digital experiences. We are a team of
           passionate creatives, developers, and innovators dedicated to
@@ -39,9 +39,9 @@ function IntroText({ currentPage }: { currentPage: number }) {
           visibly witness an increase in sales. 🗿
         </div>
       </div>
-      <div className="absolute left-[200vw] top-0 flex h-screen w-screen flex-col items-center justify-center text-center text-white">
+      <div className="absolute left-[200vw] px-4 top-0 flex h-screen w-screen flex-col justify-center md:items-center text-left md:text-center text-white">
         <div className="text-6xl font-black">Our recipe</div>
-        <div className="w-2/3 pt-2 text-2xl lg:text-3xl font-light">
+        <div className="pt-2 text-2xl lg:text-3xl font-light">
           Developers on 🚬 + Artists on ☕ = 🔥
         </div>
       </div>

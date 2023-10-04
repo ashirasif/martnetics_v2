@@ -12,7 +12,6 @@ function Testimonial() {
 
   useEffect(() => {
     api.start({ to: { left: `${testNumber * -75}vw` } });
-    console.log(testNumber);
   }, [testNumber]);
 
   const testimonials = {

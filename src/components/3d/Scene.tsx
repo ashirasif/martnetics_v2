@@ -1,6 +1,5 @@
-import { useSpring, a, config } from "@react-spring/three";
+
 import {
-  CameraControls,
   Float,
   Html,
   PerspectiveCamera,
@@ -9,8 +8,7 @@ import {
 } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import { easing } from "maath";
-import { Suspense, useEffect, useRef, useState } from "react";
-import { Color } from "three";
+import { Suspense, useEffect, useRef } from "react";
 
 import Frames from "~/components/3d/Frames";
 import Watch from "~/components/3d/Watch";
@@ -19,18 +17,17 @@ import IntroText3d from "./introText3d";
 
 function Perm({ handleState }: { handleState: (s: boolean) => void }) {
   useEffect(() => {
-    return () => {
-      console.log("Perm unmounted");
+    return () => { 
       handleState(true);
     };
-  }, []);
+  }, [handleState]);
 
   const { progress } = useProgress();
 
   return (
     <Html center>
-      <div className="flex h-screen w-screen flex-col items-center justify-center overflow-hidden bg-black text-8xl font-black text-blue-300">
-        {Math.floor(progress)}
+      <div className="flex h-screen w-screen flex-col items-center justify-center overflow-hidden bg-black text-8xl font-black text-white">
+        {Math.floor(progress)}%
       </div>
     </Html>
   );
@@ -72,7 +69,7 @@ export const Scene = ({
         [
           cameraPosition[currentPage as keyof typeof cameraPosition][0]!,
           cameraPosition[currentPage as keyof typeof cameraPosition][1]!,
-          cameraPosition[currentPage as keyof typeof cameraPosition][2]! + (isMobile ? 10: 0),
+          cameraPosition[currentPage as keyof typeof cameraPosition][2]!,
         ],
         0.4,
         dt,

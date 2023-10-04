@@ -124,20 +124,22 @@ export default function Home() {
   }, []);
 
   // handle wheel event on desktop
+  const handleScroll = (e: WheelEvent) : void => {
+    let trackpad: boolean = e.deltaY
+      ? e.deltaY <= 100
+      : e.deltaMode === 0;
+    console.log(trackpad, e.deltaMode, e.deltaY)
+    if (
+      m + (Math.sign(e.deltaY) / 100) * (trackpad ? 0.8 : 3) > 0.002 &&
+      m + (Math.sign(e.deltaY) / 100) * (trackpad ? 0.8 : 3) <= 1
+    ) {
+      setM(m + (Math.sign(e.deltaY) / 100) * (trackpad ? 0.8 : 3));
+    }
+  }
 
   useEffect(() => {
     if (!isMobile) {
-      window.addEventListener("wheel", (e) => {
-        let trackpad: boolean = e.deltaY
-          ? e.deltaY === -3 * e.deltaY
-          : e.deltaMode === 0;
-        if (
-          m + (Math.sign(e.deltaY) / 100) * (trackpad ? 0.5 : 3) > 0.002 &&
-          m + (Math.sign(e.deltaY) / 100) * (trackpad ? 0.5 : 3) <= 1
-        ) {
-          setM(m + (Math.sign(e.deltaY) / 100) * (trackpad ? 0.5 : 3));
-        }
-      });
+      window.addEventListener("wheel",handleScroll);
     }
   });
 
@@ -182,7 +184,7 @@ export default function Home() {
           {perm ? (
             <>
               {/* Progress */}
-              <div className="pointer-events-none absolute bottom-16 right-4 z-50 text-xl font-light text-white lg:text-2xl 2xl:text-4xl">
+              <div className={"pointer-events-none absolute right-4 z-50 text-xl font-black text-white lg:text-2xl 2xl:text-4xl" + (isMobile ? " bottom-16" : " bottom-6" )}>
                 {Math.floor(m * 100)}%
               </div>
 
@@ -293,7 +295,7 @@ export default function Home() {
 
               {/* Watch Markup */}
               <div className="absolute left-0 top-0">
-                <div className="flex h-screen flex-col justify-end px-8 py-20 text-white lg:justify-center">
+                <div className="flex h-screen flex-col justify-end px-4 py-20 text-white lg:justify-center">
                   <a.div
                     className="relative z-20"
                     style={springProductShowcase as any}
@@ -301,19 +303,18 @@ export default function Home() {
                     <div className="text-5xl font-black">
                       Selling A Product?
                     </div>
-                    <div className="pt-2 text-2xl font-light">
-                      Allow us to showcase it ⌚
-                    </div>
-                    <div className="text-lg font-light">
-                      Ditch the 2D images in favor of realtime 3D previews
+                    <div className="pt-2 font-light">
+                      Allow us to showcase it ⌚. Ditch the 2D images in favor of realtime 3D previews
                     </div>
                   </a.div>
-                  <a.div
-                    className="relative z-20 justify-self-end text-lg font-black tracking-wide text-white/70"
-                    style={springProductShowcase as any}
-                  >
-                    <p>?: drag the watch around</p>
-                  </a.div>
+                  {isMobile ? null: (
+                    <a.div
+                      className="relative z-20 justify-self-end text-lg font-black tracking-wide text-white/70"
+                      style={springProductShowcase as any}
+                    >
+                      <p>?: drag the watch around</p>
+                    </a.div>
+                  )}
                 </div>
               </div>
 
