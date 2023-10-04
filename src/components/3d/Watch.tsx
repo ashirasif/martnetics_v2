@@ -76,7 +76,10 @@ function Model(props: {
           })
         : api.start({ to: { rotation: [0, 0, 0] } });
     } else {
-      api.start({ to: { rotation: [-0.1, Math.PI / 8, 0] } });
+      api.start({
+        to: { rotation: [-0.1, Math.PI / 8, 0] },
+        config: config.wobbly,
+      });
     }
   }, [props.currentPage]);
 

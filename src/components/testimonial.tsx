@@ -5,14 +5,21 @@ function Testimonial() {
   const [testNumber, setTestNumber] = useState(1);
   const [spring, api] = useSpring(() => ({
     from: {
-      left: "0vw",
+      left: "-50vw",
     },
     config: config.gentle,
+    onStart: () => console.log("started"),
+    onRest: () => console.log("paused"),
   }));
 
-  useEffect(() => {
-    api.start({ to: { left: `${testNumber * -75}vw` } });
-  }, [testNumber]);
+  // useEffect(() => {
+  //   console.log(testNumber);
+  //   api.start({ to: { left: `${testNumber * -50 + 50}vw` } });
+  // }, [testNumber]);
+
+  const handleTestClick = (n: number) => {
+    api.start({ to: { left: `${n * -50}vw` } });
+  };
 
   const testimonials = {
     nazim: {
@@ -30,9 +37,12 @@ function Testimonial() {
   };
 
   return (
-    <div className="relative">
-      <div className="flex flex-row items-center justify-around">
-        <div
+    <div className="flex h-screen flex-col justify-center w-screen items-center">
+      <div className="text-center text-6xl font-black text-white">
+        People Said
+      </div>
+      <div className="self-start pt-16">
+        {/* <div
           onClick={() => {
             if (testNumber - 1 < 0) {
               setTestNumber(Object.keys(testimonials).length - 1);
@@ -45,9 +55,41 @@ function Testimonial() {
           className="relative z-50 rounded-full bg-white p-4 text-2xl transition-all duration-300 hover:bg-black hover:text-white"
         >
           &lt;
+        </div> */}
+
+        <div className="text-white">
+          <a.div
+            className="relative flex translate-x-[25vw] flex-row justify-start gap-4"
+            style={spring}
+          >
+            <div
+              className="h-40 w-[50vw] rounded-2xl bg-gray-600/70"
+              onClick={() => {
+                handleTestClick(0);
+              }}
+            >
+              bleh
+            </div>
+            <div
+              className="h-40 w-[50vw] rounded-2xl bg-gray-600/70"
+              onClick={() => {
+                handleTestClick(1);
+              }}
+            >
+              blah
+            </div>
+            <div
+              className="h-40 w-[50vw] rounded-2xl bg-gray-600/70"
+              onClick={() => {
+                handleTestClick(2);
+              }}
+            >
+              sukaaa
+            </div>
+          </a.div>
         </div>
-        <div></div>
-        <div
+
+        {/* <div
           onClick={() => {
             if (testNumber + 1 < 0) {
               setTestNumber(Object.keys(testimonials).length - 1);
@@ -60,43 +102,8 @@ function Testimonial() {
           className="relative z-50 rounded-full bg-white p-4 text-2xl transition-all duration-300 hover:bg-black hover:text-white"
         >
           &gt;
-        </div>
+        </div> */}
       </div>
-
-      <a.div
-        className="absolute -top-8 flex w-screen flex-row justify-center text-white"
-        style={spring as any}
-      >
-        {Object.keys(testimonials).map((e, i) => (
-          <div
-            key={i}
-            className={
-              "absolute top-0 w-[50vw]" + " left-[" + String(i * 100) + "vw]"
-            }
-          >
-            <div className="px-4 italic text-white">
-              "{testimonials[e as keyof typeof testimonials].text}"
-            </div>
-            <div className="mt-4 flex flex-row justify-center gap-4">
-              <div className="overflow-hidden rounded-full">
-                <img
-                  src={testimonials[e as keyof typeof testimonials].image}
-                  alt="test"
-                  className="w-12"
-                />
-              </div>
-              <div>
-                <div className="text-xl font-bold italic">
-                  {testimonials[e as keyof typeof testimonials].name}
-                </div>
-                <div className="text-sm italic text-white/60">
-                  {testimonials[e as keyof typeof testimonials].occupation}
-                </div>
-              </div>
-            </div>
-          </div>
-        ))}
-      </a.div>
     </div>
   );
 }

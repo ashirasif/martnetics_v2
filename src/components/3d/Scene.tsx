@@ -1,4 +1,3 @@
-
 import {
   Float,
   Html,
@@ -17,7 +16,7 @@ import IntroText3d from "./introText3d";
 
 function Perm({ handleState }: { handleState: (s: boolean) => void }) {
   useEffect(() => {
-    return () => { 
+    return () => {
       handleState(true);
     };
   }, [handleState]);
@@ -50,8 +49,8 @@ export const Scene = ({
     1: [0, 0, 10],
     2: [100, 0, -90],
     3: [100, 0, -140],
-    4: [0, 0.5, -90],
-    5: [-2, 0.5, -93],
+    4: isMobile ? [0, 2, -87] : [0, 0.5, -90],
+    5: isMobile ? [0, 1.5, -90] : [-2, 0.5, -92],
     6: [0, 0, 100],
     7: [0, 0, 50],
     8: [0, 0, -90],
