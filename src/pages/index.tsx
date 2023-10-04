@@ -39,7 +39,7 @@ export default function Home() {
   useEffect(() => {
     window.addEventListener("mousemove", positionElement);
     return () => window.removeEventListener("mousemove", positionElement);
-  });
+  }, []);
 
   const springFrame = useSpring({
     opacity: currentPage == 1 ? 1 : 0,
@@ -79,7 +79,7 @@ export default function Home() {
       bottom: "-10rem",
     },
     to: {
-      bottom: "1rem",
+      bottom: isMobile ? "3rem": "1rem",
     },
     config: config.wobbly,
   });
@@ -107,7 +107,6 @@ export default function Home() {
 
   // haqndles isMobile
   useEffect(() => {
-    function handleResize() {
       let check = false;
       (function (a) {
         if (
@@ -120,26 +119,14 @@ export default function Home() {
         )
           check = true;
       })(navigator.userAgent || navigator.vendor);
+
       setIsMobile(check);
-    }
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   // handle wheel event on desktop
 
   useEffect(() => {
-    if (isMobile) {
-      window.addEventListener("scroll", (e) => {
-        setM(
-          Math.floor(
-            (window.scrollY /
-              (document.documentElement.scrollHeight - window.innerHeight)) *
-              100,
-          ),
-        );
-      });
-    } else {
+    if (!isMobile) {
       window.addEventListener("wheel", (e) => {
         let trackpad: boolean = e.deltaY
           ? e.deltaY === -3 * e.deltaY
@@ -166,14 +153,16 @@ export default function Home() {
     8: "bg-[#3b0030]",
   };
 
-  const bind = useDrag(({ swipe: [swipeY] }) => {
-    // position will either be -1, 0 or 1
-    console.log(swipeY);
+  const bind = useDrag(({ swipe: [,swipeY] }) => {
     if (swipeY == 1) {
-      alert(1)
+      if (m - 1/pages.current >= 0) {
+        setM(m - 1/pages.current)
+      }
     }
     else if (swipeY == -1) {
-      alert(-1)
+      if (m + 1/pages.current < 1) {
+        setM(m + 1/pages.current)
+      }
     }
     
   }, {swipe: {duration: 500}});
@@ -193,18 +182,17 @@ export default function Home() {
           {perm ? (
             <>
               {/* Progress */}
-              <div className="pointer-events-none absolute bottom-7 right-4 z-50 text-xl font-light text-white lg:text-2xl 2xl:text-4xl">
+              <div className="pointer-events-none absolute bottom-16 right-4 z-50 text-xl font-light text-white lg:text-2xl 2xl:text-4xl">
                 {Math.floor(m * 100)}%
               </div>
 
               {/* Cursor */}
+              {isMobile ? null : (
               <div
                 ref={cursorRef}
-                className={
-                  "pointer-events-none absolute top-0 z-50 h-8 w-8 rounded-full bg-white/75 bg-blend-color" +
-                  (isMobile ? " hidden" : "")
-                }
+                className="pointer-events-none absolute top-0 z-50 h-8 w-8 rounded-full bg-white/75 bg-blend-color"
               />
+              )}
 
               {/* Logo */}
               <a.div
@@ -291,7 +279,7 @@ export default function Home() {
                     height={20}
                     alt="loader"
                   />
-                  <span className="pl-1">Scroll Down Gently</span>
+                  <span className="pl-1">{isMobile ? "Swipe up": "Scroll down gently"}</span>
                 </a.div>
               </a.div>
 
