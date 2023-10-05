@@ -1,53 +1,56 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBehance, faInstagram, faTwitter, faYoutube } from "@fortawesome/free-brands-svg-icons";
+import {
+  faBehance,
+  faInstagram,
+  faTwitter,
+  faYoutube,
+} from "@fortawesome/free-brands-svg-icons";
 
 function Contact() {
   return (
-    <div className="flex h-screen w-screen flex-col items-center justify-center text-white">
+    <div className="flex w-screen md:h-screen flex-col items-center justify-center px-4 py-20 text-white">
       {/* Form */}
-      <div className="w-[60vw]">
-        <div className="text-6xl font-black">Contact</div>
-        <div className="pt-4 text-xl font-light">
+      <div className="lg:w-[60vw]">
+        <div className="text-4xl font-black md:text-6xl">Contact</div>
+        <div className="pt-2 font-light md:pt-4 md:text-lg">
           We know you <span className="font-black italic">loved</span> what you
           saw. If not then, <span className="text-pink-300">click here</span> to
-          get an appointment with a really good eye doctor.
-        </div>
-        <div className="pt-4 text-xl font-light">
-          Honestly, you should just give us a call and we'll take on from there.
-          Since every client is looking for a unique thing and have different
-          requirements, It's just best to converse on phone or face to face.
+          get an appointment with a really good eye doctor. Honestly, you should
+          just give us a call and we&apos;ll take on from there. Since every client
+          is looking for a unique thing and have different requirements, It&apos;s
+          just best to converse on phone or face to face.
         </div>
       </div>
       <form>
-        <div className="mt-8 grid w-[60vw] grid-flow-row gap-8 rounded-xl border bg-black/50 px-8 py-4 text-xl ">
-          <div className="flex flex-row justify-between">
-            <div>
+        <div className="mt-2 md:mt-4 grid grid-flow-row rounded-xl border bg-black/50 px-8 py-4 2xl:mt-8 2xl:w-[60vw] 2xl:gap-8 2xl:text-xl">
+          <div className="grid grid-cols-3 md:gap-4 justify-between">
+            <div className="max-md:col-span-3">
               <label className="block p-2 font-bold tracking-wider">
                 NAME:
               </label>
               <input
                 type="text"
-                className="h-12 rounded-xl border-2 border-white bg-transparent px-2 focus:outline-none"
+                className="rounded-xl border border-white w-full bg-transparent px-2 sm:py-2 focus:outline-none 2xl:h-12"
                 required
               />
             </div>
-            <div>
+            <div className="max-md:col-span-3">
               <label className="block p-2 font-bold tracking-wider">
                 COMPANY NAME:
               </label>
               <input
                 type="text"
-                className="h-12 rounded-xl border-2 border-white bg-transparent px-2 focus:outline-none"
+                className="rounded-xl border border-white w-full bg-transparent px-2 focus:outline-none sm:py-2 2xl:h-12"
                 required
               />
             </div>
-            <div>
+            <div className="max-md:col-span-3">
               <label className="block p-2 font-bold tracking-wider">
                 JOB TYPE:
               </label>
               <select
-                className="h-12 appearance-none rounded-xl border-2 border-white bg-transparent px-4 after:text-right after:text-white after:content-['hello'] focus:outline-none"
+                className="w-full appearance-none rounded-xl border border-white bg-transparent px-2 sm:py-2 after:text-right after:text-white after:content-['hello'] focus:outline-none 2xl:h-12"
                 required
               >
                 <option value="web-development" className="text-black">
@@ -66,15 +69,15 @@ function Contact() {
             </div>
           </div>
           <div>
-            <label className="block p-2 font-bold tracking-wider">
-              SOME DETAILS ABOUT THE PROJECT:
+            <label className="block p-2 font-bold uppercase tracking-wider">
+              Brief Project Details:
             </label>
-            <textarea className="w-full appearance-none rounded-xl border bg-transparent p-4 focus:outline-none"></textarea>
+            <textarea className="w-full appearance-none rounded-xl border bg-transparent p-4 focus:outline-none max-sm:h-4"></textarea>
           </div>
           <div className="text-center">
             <button
               type="submit"
-              className="w-full appearance-none rounded-xl bg-white p-4 font-black tracking-widest text-black transition-all duration-300 hover:bg-black hover:text-white"
+              className="mt-2 w-full appearance-none rounded-xl bg-white p-2 font-black tracking-widest text-black transition-all duration-300 hover:bg-black hover:text-white"
             >
               SUBMIT
             </button>
@@ -83,10 +86,34 @@ function Contact() {
       </form>
 
       <div className="flex flex-row justify-center gap-20 pt-8">
-        <a href=""><FontAwesomeIcon icon={faInstagram} className="hover:text-black transition-colors duration-300 cursor-none" size="2x" /></a>
-        <a href=""><FontAwesomeIcon icon={faTwitter} size="2x" className="hover:text-black transition-colors duration-300 cursor-none" /></a>
-        <a href=""><FontAwesomeIcon icon={faBehance} size="2x" className="hover:text-black transition-colors duration-300 cursor-none" /></a>
-        <a href=""><FontAwesomeIcon icon={faYoutube} size="2x" className="hover:text-black transition-colors duration-300 cursor-none"/></a>
+        <a href="">
+          <FontAwesomeIcon
+            icon={faInstagram}
+            className="cursor-none transition-colors duration-300 hover:text-black"
+            size="2x"
+          />
+        </a>
+        <a href="">
+          <FontAwesomeIcon
+            icon={faTwitter}
+            size="2x"
+            className="cursor-none transition-colors duration-300 hover:text-black"
+          />
+        </a>
+        <a href="">
+          <FontAwesomeIcon
+            icon={faBehance}
+            size="2x"
+            className="cursor-none transition-colors duration-300 hover:text-black"
+          />
+        </a>
+        <a href="">
+          <FontAwesomeIcon
+            icon={faYoutube}
+            size="2x"
+            className="cursor-none transition-colors duration-300 hover:text-black"
+          />
+        </a>
       </div>
     </div>
   );

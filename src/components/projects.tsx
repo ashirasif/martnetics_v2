@@ -58,17 +58,17 @@ function Projects() {
   return (
     <>
       <a.div
-        className="flex h-screen w-screen flex-col justify-around py-28 md:flex-row md:px-20 px-4"
+        className="flex h-screen w-screen flex-col justify-around py-28 lg:flex-row lg:px-20 px-4"
         style={springBg}
       >
         <a.div
-          className="flex md:basis-2/3 flex-col justify-center"
+          className="flex lg:basis-2/3 flex-col justify-center"
           style={springText}
         >
           <div className="text-6xl font-black">
             {projObj[project as keyof typeof projObj].heading}
           </div>
-          <div className="pt-4 font-light">
+          <div className="pt-4 font-light md:text-lg">
             {projObj[project as keyof typeof projObj].text}
           </div>
           <div
@@ -80,7 +80,7 @@ function Projects() {
             <span className="italic text-purple-300">Art Gallery</span>
           </div>
         </a.div>
-        <div className="md:basis-1/3 max-sm:mt-4 self-center w-full rounded-2xl bg-slate-600/40 text-white/70">
+        <div className="lg:basis-1/3 max-sm:mt-4 self-center w-full rounded-2xl bg-slate-600/40 text-white/70">
           <ul className="p-4 italic">
             <li
               className="border-b py-2 transition-all duration-300 hover:text-pink-300"

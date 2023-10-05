@@ -81,6 +81,7 @@ function Model(props: {
         config: config.wobbly,
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.currentPage]);
 
   return (

@@ -31,6 +31,7 @@ function IntroText3d({
       // @ts-ignore
       meshRef.current!.material.color = color.set("#ff8ce6");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [prog]);
 
   useFrame((state, dt) => {
@@ -53,7 +54,7 @@ function IntroText3d({
       );
     } else {
       if (globalRef.current?.visible) {
-        globalRef.current!.visible = false;
+        globalRef.current.visible = false;
       }
     }
   });
