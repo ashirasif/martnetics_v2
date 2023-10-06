@@ -237,7 +237,7 @@ export default function Home() {
                   </div>
                   <div
                     className={
-                      "self-end text-right text-xl font-light sm:text-3xl 2xl:text-4xl" +
+                      "self-end text-right text-xl font-light sm:text-2xl 2xl:text-4xl" +
                       (isMobile ? " text-white" : " text-white/70")
                     }
                   >
@@ -310,7 +310,7 @@ export default function Home() {
                     <div className="font-black max-md:text-6xl md:text-5xl 2xl:text-6xl">
                       Selling A Product?
                     </div>
-                    <div className="pt-2 font-light sm:text-xl">
+                    <div className="pt-2 font-light sm:text-xl lg:w-[40vw]">
                       Allow us to showcase it ⌚. Ditch the 2D images in favor
                       of realtime 3D previews
                     </div>
