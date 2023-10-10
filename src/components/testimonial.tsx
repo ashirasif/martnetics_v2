@@ -36,27 +36,27 @@ function Testimonial({ isMobile }: { isMobile: boolean }) {
     api.start({
       to: { left: `${number * -(window.innerWidth > 1024 ? 51 : 85)}vw` },
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [number]);
 
   const testimonials = {
     nazim: {
-      text: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Excepturi asperiores nemo voluptatum? Blanditiis aperiam earum corporis incidunt temporibus? Similique modi veritatis eius quae exercitationem officia et quis excepturi itaque alias!",
+      text: "We gave them freedom to do their own thing and the result was more than what we were expecting. All requirements ticked and a design worth looking at. Modern and dynamic. They also gave us our own design language comprising of our values and priciples. Safe to say that our office now needs a renovation.",
       name: "Muhammad Nazim",
       image: "/nazim.png",
       occupation: "CEO, SA Builders",
     },
     waqas: {
-      text: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Excepturi asperiores nemo voluptatum? Blanditiis aperiam earum corporis incidunt temporibus? Similique modi veritatis eius quae exercitationem officia et quis excepturi itaque alias!",
+      text: "Our work was quite straight forward and they overtook it very professionally. The delivery was on time and after a revision, we had a site that was functional and elegant.",
       name: "Waqas Qureshi",
-      image: "/nazim.png",
+      image: "/waqas.jpeg",
       occupation: "CEO, knock social",
     },
     doll: {
-      text: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Excepturi asperiores nemo voluptatum? Blanditiis aperiam earum corporis incidunt temporibus? Similique modi veritatis eius quae exercitationem officia et quis excepturi itaque alias!",
-      name: "Waqas Qureshi",
-      image: "/nazim.png",
-      occupation: "CEO, knock social",
+      text: "We needed a website fast. Like 3 days fast. I don't know how but they had a working demo on the next day. I just know for a fact who I'm calling for the next update.",
+      name: "Areeb Shuaib",
+      image: "/areeb.jpg",
+      occupation: "CEO, IT WALAY",
     },
   };
 
@@ -80,7 +80,8 @@ function Testimonial({ isMobile }: { isMobile: boolean }) {
                 }}
               >
                 <div className="text-center">
-                  &quot;{testimonials[e as keyof typeof testimonials].text}&quot;
+                  &quot;{testimonials[e as keyof typeof testimonials].text}
+                  &quot;
                 </div>
                 <div className="flex flex-row justify-center">
                   <Image

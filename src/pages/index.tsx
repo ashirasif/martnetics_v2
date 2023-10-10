@@ -10,6 +10,8 @@ import Testimonial from "~/components/testimonial";
 import Projects from "~/components/projects";
 import Contact from "~/components/contact";
 import { useDrag } from "@use-gesture/react";
+import NavBar from "~/components/navbar";
+import Icons from "~/components/icons";
 
 export default function Home() {
   const [dpr, setDpr] = useState<number>(1);
@@ -27,15 +29,19 @@ export default function Home() {
 
   // updates cursor position with mouse-move
   const positionElement = (e: any) => {
+    console.log("hello from event");
     const mouseY = e.clientY;
     const mouseX = e.clientX;
     if (!cursorRef.current) {
+      console.log("cursor not found");
       return;
     }
+    console.log(mouseX, mouseY);
     cursorRef.current.style.transform = `translate3d(${mouseX - 15}px, ${
       mouseY - 15
     }px, 0)`;
   };
+
   useEffect(() => {
     window.addEventListener("mousemove", positionElement);
     return () => window.removeEventListener("mousemove", positionElement);
@@ -186,7 +192,7 @@ export default function Home() {
               {/* Progress */}
               <div
                 className={
-                  "pointer-events-none absolute right-4 z-50 rounded-full bg-black px-3 py-2 text-xl font-black text-white lg:text-2xl 2xl:text-4xl" +
+                  "pointer-events-none absolute right-4 z-30 rounded-full bg-black px-3 py-2 text-xl font-black text-white lg:text-2xl 2xl:text-4xl" +
                   (isMobile ? " bottom-16" : " bottom-6")
                 }
               >
@@ -219,6 +225,11 @@ export default function Home() {
                 <span className="absolute -top-1 left-[80px] text-base font-light tracking-widest text-white 2xl:left-[90px] 2xl:text-xl">
                   DESIGN HOUSE
                 </span>
+              </a.div>
+
+              {/* NavBar */}
+              <a.div className="fixed right-0 top-0 z-40" style={springLogo}>
+                <NavBar setM={setM} pages={pages.current} />
               </a.div>
 
               {/* Landing page */}
@@ -272,6 +283,9 @@ export default function Home() {
                         </div>
                       </li>
                     </ul>
+                  </div>
+                  <div className="mt-4 flex flex-col justify-end items-end gap-2 lg:flex-row">
+                    <Icons />
                   </div>
                 </div>
 
