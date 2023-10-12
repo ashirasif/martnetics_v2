@@ -27,7 +27,7 @@ function IntroText({ currentPage }: { currentPage: number }) {
 
   return (
     <a.div className="absolute top-0" style={springLeftToRight}>
-      <div className="absolute left-[100vw] top-0 flex h-screen w-screen flex-col justify-center px-4 text-left text-white md:items-center md:text-center">
+      <div className="absolute left-[100vw] top-0 flex h-screen w-screen flex-col justify-center px-4 pr-8 text-left text-white md:items-center md:text-center">
         <div className="text-6xl font-black">Who are we?</div>
         <div className="pt-2 text-base sm:text-lg font-normal md:w-2/3">
           At Martnetics, we are more than just a design house; we are the

@@ -9,8 +9,6 @@ function Testimonial({ isMobile }: { isMobile: boolean }) {
       left: "0vw",
     },
     config: config.gentle,
-    onStart: () => console.log("started"),
-    onRest: () => console.log("paused"),
   }));
 
   const [number, setNumber] = useState<number>(0);

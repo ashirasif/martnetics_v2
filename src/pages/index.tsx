@@ -12,11 +12,13 @@ import Contact from "~/components/contact";
 import { useDrag } from "@use-gesture/react";
 import NavBar from "~/components/navbar";
 import Icons from "~/components/icons";
+import PageDots from "~/components/pageDots";
+import Form from "~/components/form";
 
 export default function Home() {
   const [dpr, setDpr] = useState<number>(1);
   const [m, setM] = useState<number>(0.002);
-  const pages = useRef<number>(8);
+  const pages = useRef<number>(9);
   const [perm, setPerm] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [isMobile, setIsMobile] = useState<boolean>(false);
@@ -29,14 +31,11 @@ export default function Home() {
 
   // updates cursor position with mouse-move
   const positionElement = (e: any) => {
-    console.log("hello from event");
     const mouseY = e.clientY;
     const mouseX = e.clientX;
     if (!cursorRef.current) {
-      console.log("cursor not found");
       return;
     }
-    console.log(mouseX, mouseY);
     cursorRef.current.style.transform = `translate3d(${mouseX - 15}px, ${
       mouseY - 15
     }px, 0)`;
@@ -111,6 +110,11 @@ export default function Home() {
     pointerEvents: currentPage == 8 ? "auto" : "none",
   });
 
+  const springForm = useSpring({
+    opacity: currentPage == 9 ? 1 : 0,
+    pointerEvents: currentPage == 9 ? "auto" : "none",
+  });
+
   // haqndles isMobile
   useEffect(() => {
     let check = false;
@@ -132,7 +136,7 @@ export default function Home() {
   // handle wheel event on desktop
   const handleScroll = (e: WheelEvent): void => {
     const trackpad: boolean = e.deltaY
-      ? Math.abs(e.deltaY) <= 100
+      ? Math.abs(e.deltaY) < 100
       : e.deltaMode === 0;
     if (
       m + (Math.sign(e.deltaY) / 100) * (trackpad ? 0.8 : 3) > 0.002 &&
@@ -157,7 +161,8 @@ export default function Home() {
     5: "bg-[#001a1e]",
     6: "bg-teal-950",
     7: "bg-black",
-    8: "bg-[#3b0030]",
+    8: "bg-[#000d28]",
+    9: "bg-[#000d17]",
   };
 
   const bind = useDrag(
@@ -232,6 +237,9 @@ export default function Home() {
                 <NavBar setM={setM} pages={pages.current} />
               </a.div>
 
+              {/* Pages Dots */}
+              <PageDots currentPage={currentPage} pages={pages.current} />
+
               {/* Landing page */}
               <a.div
                 className="relative z-20 flex h-screen flex-col justify-between"
@@ -284,7 +292,7 @@ export default function Home() {
                       </li>
                     </ul>
                   </div>
-                  <div className="mt-4 flex flex-col justify-end items-end gap-2 lg:flex-row">
+                  <div className="mt-4 flex flex-col items-end justify-end gap-2 lg:flex-row">
                     <Icons />
                   </div>
                 </div>
@@ -379,6 +387,13 @@ export default function Home() {
                 style={springTestimonials as any}
               >
                 <Testimonial isMobile={isMobile} />
+              </a.div>
+
+              <a.div
+                className={"absolute left-0 top-0 z-20"}
+                style={springForm as any}
+              >
+                <Form />
               </a.div>
             </>
           ) : null}

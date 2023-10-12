@@ -29,10 +29,10 @@ function Projects() {
       heading: "Fishbowl",
       text: "A marketing firm needed to grab attention of the giants whilst making sure that they don't look unprofessional. We delivered exactly what they wanted. Some slick animations here, a slick carousel there, with spirkle of elegance.",
     },
-    "AlSultan Transport": {
+    Makkah2Madinah: {
       textColor: "#006d62",
       bgColor: "#001c1e",
-      heading: "AlSultan Transport",
+      heading: "Makkah 2 Madinah",
       text: "A website made with wordpress CMS with a custom cab booking system. The challenge was to get all the API endpoints and data validity right and oh boy did we get that right.",
     },
   };
@@ -58,7 +58,7 @@ function Projects() {
   return (
     <>
       <a.div
-        className="flex h-screen w-screen flex-col justify-around px-4 py-28 lg:flex-row lg:px-20"
+        className="flex h-screen w-screen flex-col justify-around px-4 py-28 pr-6 lg:flex-row lg:px-20"
         style={springBg}
       >
         <a.div
@@ -90,21 +90,27 @@ function Projects() {
               onMouseOver={handleProjectHover}
               onMouseLeave={handleMouseLeave}
             >
-              <a href="">SA Builders</a>
+              <a href="https://sa-builders-next.vercel.app/" target="_blank">
+                SA Builders
+              </a>
             </li>
             <li
               className="border-b py-2 transition-all duration-300 hover:text-yellow-300"
               onMouseOver={handleProjectHover}
               onMouseLeave={handleMouseLeave}
             >
-              <a href="">Fishb0wl</a>
+              <a href="https://fishbowl.com.pk/" target="_blank">
+                Fishb0wl
+              </a>
             </li>
             <li
               className="border-b py-2 transition-all duration-300 hover:text-yellow-500"
               onMouseOver={handleProjectHover}
               onMouseLeave={handleMouseLeave}
             >
-              <a href="">AlSultan Transport</a>
+              <a href="https://makkah2madinah.com/" target="_blank">
+                Makkah2Madinah
+              </a>
             </li>
           </ul>
         </div>

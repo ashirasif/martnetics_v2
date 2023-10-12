@@ -43,7 +43,7 @@ export const Scene = ({
   currentPage: number;
   handleState: (s: boolean) => void;
 }) => {
-  const pages = useRef<number>(8);
+  const pages = useRef<number>(9);
   const camRef = useRef(null);
   const cameraPosition = {
     1: [0, 0, 10],
@@ -54,7 +54,7 @@ export const Scene = ({
     6: [0, 0, 100],
     7: [0, 0, 50],
     8: [0, 0, -90],
-    9: [0, 0, -90],
+    9: [0, 0, 0],
     10: [0, 0, -90],
   };
 
