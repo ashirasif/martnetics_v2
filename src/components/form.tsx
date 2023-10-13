@@ -13,10 +13,6 @@ const Form = () => {
       } From ${
         (document.querySelector('[name="company"]')! as HTMLInputElement).value
       }`;
-      console.log(
-        (document.querySelector('[name="details"]') as HTMLTextAreaElement)!
-          .value,
-      );
       const body = `Project Type: ${
         document.getElementById("job-btn")!.innerText
       } %0D%0ACompany Name: ${
@@ -25,7 +21,6 @@ const Form = () => {
         (document.querySelector('[name="details"]')! as HTMLTextAreaElement)
           .value
       }`;
-      console.log(body);
       window.open(
         `mailto:contact@martnetics.com?subject=${encodeURI(
           subject,
