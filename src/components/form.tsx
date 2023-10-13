@@ -8,29 +8,29 @@ const Form = () => {
   }
   function handleSumbit() {
     if (document.getElementById("job-btn")?.innerText != "Select One") {
-      const subject = `${(
-        document.querySelector('[name="name"]') as HTMLInputElement
-      )?.value} From ${(
-        document.querySelector('[name="company"]') as HTMLInputElement
-      )?.value}`;
+      const subject = `${
+        (document.querySelector('[name="name"]') as HTMLInputElement).value
+      } From ${
+        (document.querySelector('[name="company"]') as HTMLInputElement).value
+      }`;
       console.log(
         (document.querySelector('[name="details"]') as HTMLTextAreaElement)
-          ?.value,
+          .value,
       );
-      const body = `Project Type: ${document.getElementById("job-btn")
-        ?.innerText} %0D%0ACompany Name: ${(document.querySelector('[name="email"]') as HTMLInputElement
-        )?.value} %0D%0A${(
+      const body = `Project Type: ${
+        document.getElementById("job-btn")!.innerText
+      } %0D%0ACompany Name: ${
+        (document.querySelector('[name="email"]') as HTMLInputElement).value
+      } %0D%0A${(
         document.querySelector('[name="details"]') as HTMLTextAreaElement
-      )?.value}`;
+      ).value}`;
       console.log(body);
       window.open(
         `mailto:contact@martnetics.com?subject=${encodeURI(
           subject,
         )}&body=${body}`,
       );
-
     }
-    
   }
   return (
     <div className="absolute left-0 top-0 flex h-screen w-screen flex-col items-center justify-center">

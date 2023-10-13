@@ -49,7 +49,9 @@ function Contact() {
           <Icons />
         </div>
       </div>
-      <div className="lg:text-xl mt-4 text-white/30 italic">Or just fill the form below and we'll get to you.😇</div>
+      <div className="mt-4 italic text-white/30 lg:text-xl">
+        Or just fill the form below and we&apos;ll get to you.😇
+      </div>
     </div>
   );
 }
