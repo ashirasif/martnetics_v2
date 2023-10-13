@@ -9,18 +9,13 @@ const Form = () => {
   function handleSumbit() {
     if (document.getElementById("job-btn")?.innerText != "Select One") {
       const subject = `${
-        (document.querySelector('[name="name"]')! as HTMLInputElement).value
-      } From ${
-        (document.querySelector('[name="company"]')! as HTMLInputElement).value
-      }`;
+        (document.querySelector('[name="name"]') as HTMLInputElement)!.value
+      } From ${(document.querySelector('[name="company"]') as HTMLInputElement)!.value}`;
       const body = `Project Type: ${
         document.getElementById("job-btn")!.innerText
-      } %0D%0ACompany Name: ${
-        (document.querySelector('[name="email"]')! as HTMLInputElement).value
-      } %0D%0A${
-        (document.querySelector('[name="details"]')! as HTMLTextAreaElement)
-          .value
-      }`;
+      } %0D%0ACompany Name: ${(
+        document.querySelector('[name="email"]') as HTMLInputElement)!.value} %0D%0A${(
+        document.querySelector('[name="details"]') as HTMLTextAreaElement)!.value}`;
       window.open(
         `mailto:contact@martnetics.com?subject=${encodeURI(
           subject,
