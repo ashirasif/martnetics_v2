@@ -60,7 +60,7 @@ function Testimonial({ isMobile }: { isMobile: boolean }) {
 
   return (
     <div className="flex h-screen w-screen flex-col items-center justify-center">
-      <div className="text-center text-6xl font-black text-white">
+      <div className="text-center text-4xl font-black text-white 2xl:text-6xl">
         People Said
       </div>
       <div className="self-start pt-16">

@@ -58,17 +58,17 @@ function Projects() {
   return (
     <>
       <a.div
-        className="flex h-screen w-screen flex-col justify-around px-4 py-28 pr-6 lg:flex-row lg:px-20"
+        className="flex h-screen w-screen flex-col justify-center px-4 py-28 pr-8 lg:flex-row lg:px-20"
         style={springBg}
       >
         <a.div
           className="flex flex-col justify-center lg:basis-2/3"
           style={springText}
         >
-          <div className="text-6xl font-black">
+          <div className="text-4xl 2xl:text-6xl font-black">
             {projObj[project as keyof typeof projObj].heading}
           </div>
-          <div className="pt-4 font-light md:text-lg">
+          <div className="pt-4 text-sm font-light md:text-lg">
             {projObj[project as keyof typeof projObj].text}
           </div>
           <div className={"font-bold" + (project == "Intro" ? "" : " hidden")}>
