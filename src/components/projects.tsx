@@ -37,9 +37,9 @@ function Projects() {
     },
   };
 
-  const springBg = useSpring({
-    backgroundColor: projObj[project as keyof typeof projObj]?.bgColor,
-  });
+  // const springBg = useSpring({
+  //   backgroundColor: projObj[project as keyof typeof projObj]?.bgColor,
+  // });
 
   const springText = useSpring({
     color: projObj[project as keyof typeof projObj]?.textColor,
@@ -59,7 +59,7 @@ function Projects() {
     <>
       <a.div
         className="flex h-screen w-screen flex-col justify-center px-4 py-28 pr-8 lg:flex-row lg:px-20"
-        style={springBg}
+      
       >
         <a.div
           className="flex flex-col justify-center lg:basis-2/3"

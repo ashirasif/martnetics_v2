@@ -11,7 +11,7 @@ function Contact() {
       {/* Form */}
       <div className="lg:w-[60vw]">
         <div className="text-4xl font-black 2xl:text-6xl">Contact</div>
-        <div className="pt-2 font-light md:pt-4 md:text-lg">
+        <div className="pt-2 font-light md:pt-4 2xl:text-lg">
           We know you <span className="font-black italic">loved</span> what you
           saw. If not then, <span className="text-pink-300">click here</span> to
           get an appointment with a really good eye doctor. Honestly, you should
@@ -21,15 +21,15 @@ function Contact() {
         </div>
       </div>
       <div className="mt-4 grid grid-cols-4 rounded-3xl border border-white bg-black/60 p-2 lg:max-w-[60vw]">
-        <div className="col-span-3 flex flex-col justify-around border-r border-white p-2 lg:text-lg 2xl:p-4">
-          <div>
-            <h1 className="font-bold lg:text-2xl">Address:</h1>
+        <div className="col-span-3 flex flex-col justify-around border-r border-white p-2 2xl:text-lg 2xl:p-4">
+          {/* <div>
+            <h1 className="font-bold lg:text-xl 2xl:text-2xl">Address:</h1>
             <p className="font-light italic text-white/60 hover:text-white">
               7901 4th St. N STE 12325 St.Petersburg, FL 33702
             </p>
-          </div>
+          </div> */}
           <div>
-            <h1 className="font-bold lg:text-2xl">Email:</h1>
+            <h1 className="font-bold lg:text-xl 2xl:text-2xl">Email:</h1>
             <p
               className="font-light italic text-white/60 hover:text-white"
               onClick={handleMail}
@@ -37,15 +37,18 @@ function Contact() {
               contact@martnetics.com
             </p>
           </div>
+          <div className="font-bold lg:text-xl 2xl:text-2xl">
+            OR
+          </div>
           <div>
-            <h1 className="font-bold lg:text-2xl">Phone:</h1>
-            <p className="font-light italic text-white">+1 (786) 998 0726</p>
-            <div className="italic text-white/60 hover:text-white">
+            {/* <h1 className="font-bold lg:text-xl 2xl:text-2xl">Phone:</h1> */}
+            {/* <p className="font-light italic text-white">+1 (786) 998 0726</p> */}
+            <a href="https://calendly.com/martneticsllc" className="text-white/60 hover:text-white">
               Book a call?
-            </div>
+            </a>
           </div>
         </div>
-        <div className="flex flex-col items-center justify-center gap-4 p-4 2xl:gap-8">
+        <div className="flex flex-col items-center justify-center gap-2 p-4 2xl:gap-8">
           <Icons />
         </div>
       </div>

@@ -19,7 +19,7 @@ const PageDots = ({
           <div
             key={i}
             className={
-              "text-2xl text-white transition-all duration-500 md:text-5xl" +
+              "text-2xl text-white transition-all duration-500 2xl:text-5xl" +
               (currentPage == i + 1
                 ? " font-bold md:font-black"
                 : " font-light")

@@ -27,7 +27,7 @@ const Form = () => {
     <div className="absolute left-0 top-0 flex h-screen w-screen flex-col items-center justify-center">
       {/* <form> */}
       <div className="mt-2 grid w-[90vw] grid-flow-row gap-4 rounded-xl bg-black/50 px-8 py-4 text-white md:mt-4 2xl:mt-8 2xl:w-[80vw] 2xl:gap-20 2xl:text-xl">
-        <div className="grid grid-cols-4 justify-between gap-4 md:gap-20">
+        <div className="grid grid-cols-4 justify-between gap-4 2xl:gap-20">
           <div className="col-span-2 max-md:col-span-4">
             <label className="block p-2 font-bold tracking-wider">
               NAME: <span className="text-base text-white/50">*</span>

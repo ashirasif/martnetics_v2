@@ -46,7 +46,7 @@ export const Scene = ({
   const pages = useRef<number>(9);
   const camRef = useRef(null);
   const cameraPosition = {
-    1: [0, 0, 10],
+    1: [0, 0, 9],
     2: [100, 0, -90],
     3: [100, 0, -140],
     4: isMobile ? [0, 2, -87] : [0, 0.5, -90],
