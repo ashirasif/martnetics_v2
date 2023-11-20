@@ -15,7 +15,7 @@ function Projects() {
       textColor: "#f472b6",
       bgColor: "#fae8ff",
       heading: "Dazzling Donuts",
-      text: "Dazzling Donut redefines the limits of an online store regarding interactivity and product showcasing. ",
+      text: "Dazzling Donut redefines the limits of an online store regarding interactivity and product showcasing.",
     },
     "SA Builders": {
       textColor: "#eab308",
@@ -27,13 +27,13 @@ function Projects() {
       textColor: "#fde047",
       bgColor: "#172554",
       heading: "Fishbowl",
-      text: "Delight your eyes with some of the projects we've done in past. While some were basic (clients' requirements), others brought along challenges which allowed our team to exercise their brains. Nonetheless, the projects speak for themselves and enchants visitors with increased interactivity even with the most simple components, tying a knot for a memorable experience at the least.",
+      text: "A marketing firm needed to grab attention of the giants whilst making sure that they don't look unprofessional. We delivered exactly what they wanted. Some slick animations here, a slick carousel there, with spirkle of elegance.",
     },
-    AlSultanTransport: {
+    Makkah2Madinah: {
       textColor: "#006d62",
       bgColor: "#001c1e",
-      heading: "AlSultanTransport",
-      text: "Delight your eyes with some of the projects we've done in past. While some were basic (clients' requirements), others brought along challenges which allowed our team to exercise their brains. Nonetheless, the projects speak for themselves and enchants visitors with increased interactivity even with the most simple components, tying a knot for a memorable experience at the least.",
+      heading: "Makkah 2 Madinah",
+      text: "A website made with wordpress CMS with a custom cab booking system. The challenge was to get all the API endpoints and data validity right and oh boy did we get that right.",
     },
   };
 
@@ -58,29 +58,25 @@ function Projects() {
   return (
     <>
       <a.div
-        className="flex h-screen w-screen flex-col justify-around py-28 lg:flex-row lg:px-20 px-4"
+        className="flex h-screen w-screen flex-col justify-center px-4 py-28 pr-8 lg:flex-row lg:px-20"
         style={springBg}
       >
         <a.div
-          className="flex lg:basis-2/3 flex-col justify-center"
+          className="flex flex-col justify-center lg:basis-2/3"
           style={springText}
         >
-          <div className="text-6xl font-black">
+          <div className="text-4xl 2xl:text-6xl font-black">
             {projObj[project as keyof typeof projObj].heading}
           </div>
-          <div className="pt-4 font-light md:text-lg">
+          <div className="pt-4 text-sm font-light md:text-lg">
             {projObj[project as keyof typeof projObj].text}
           </div>
-          <div
-            className={
-              "font-bold" + (project == "Intro" ? "" : " hidden")
-            }
-          >
+          <div className={"font-bold" + (project == "Intro" ? "" : " hidden")}>
             Also also also... Check out our{" "}
             <span className="italic text-purple-300">Art Gallery</span>
           </div>
         </a.div>
-        <div className="lg:basis-1/3 max-sm:mt-4 self-center w-full rounded-2xl bg-slate-600/40 text-white/70">
+        <div className="w-full self-center rounded-2xl bg-slate-600/40 text-white/70 max-sm:mt-4 lg:basis-1/3">
           <ul className="p-4 italic">
             <li
               className="border-b py-2 transition-all duration-300 hover:text-pink-300"
@@ -94,21 +90,27 @@ function Projects() {
               onMouseOver={handleProjectHover}
               onMouseLeave={handleMouseLeave}
             >
-              <a href="">SA Builders</a>
+              <a href="https://sa-builders-next.vercel.app/" target="_blank">
+                SA Builders
+              </a>
             </li>
             <li
               className="border-b py-2 transition-all duration-300 hover:text-yellow-300"
               onMouseOver={handleProjectHover}
               onMouseLeave={handleMouseLeave}
             >
-              <a href="">Fishb0wl</a>
+              <a href="https://fishbowl.com.pk/" target="_blank">
+                Fishb0wl
+              </a>
             </li>
             <li
               className="border-b py-2 transition-all duration-300 hover:text-yellow-500"
               onMouseOver={handleProjectHover}
               onMouseLeave={handleMouseLeave}
             >
-              <a href="">AlSultanTransport</a>
+              <a href="https://makkah2madinah.com/" target="_blank">
+                Makkah2Madinah
+              </a>
             </li>
           </ul>
         </div>

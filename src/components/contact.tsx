@@ -1,119 +1,56 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faBehance,
-  faInstagram,
-  faTwitter,
-  faYoutube,
-} from "@fortawesome/free-brands-svg-icons";
+import Icons from "./icons";
 
 function Contact() {
+  function handleMail() {
+    // @ts-ignore
+    window.location = "mailto:contact@martnetics.com";
+  }
   return (
-    <div className="flex w-screen md:h-screen flex-col items-center justify-center px-4 py-20 text-white">
+    <div className="flex w-screen flex-col items-center justify-center px-4 pr-8 text-white h-screen">
       {/* Form */}
       <div className="lg:w-[60vw]">
-        <div className="text-4xl font-black md:text-6xl">Contact</div>
+        <div className="text-4xl font-black 2xl:text-6xl">Contact</div>
         <div className="pt-2 font-light md:pt-4 md:text-lg">
           We know you <span className="font-black italic">loved</span> what you
           saw. If not then, <span className="text-pink-300">click here</span> to
           get an appointment with a really good eye doctor. Honestly, you should
-          just give us a call and we&apos;ll take on from there. Since every client
-          is looking for a unique thing and have different requirements, It&apos;s
-          just best to converse on phone or face to face.
+          just give us a call and we&apos;ll take on from there. Since every
+          client is looking for a unique thing and have different requirements,
+          It&apos;s just best to converse on phone or face to face.
         </div>
       </div>
-      <form>
-        <div className="mt-2 md:mt-4 grid grid-flow-row rounded-xl border bg-black/50 px-8 py-4 2xl:mt-8 2xl:w-[60vw] 2xl:gap-8 2xl:text-xl">
-          <div className="grid grid-cols-3 md:gap-4 justify-between">
-            <div className="max-md:col-span-3">
-              <label className="block p-2 font-bold tracking-wider">
-                NAME:
-              </label>
-              <input
-                type="text"
-                className="rounded-xl border border-white w-full bg-transparent px-2 sm:py-2 focus:outline-none 2xl:h-12"
-                required
-              />
-            </div>
-            <div className="max-md:col-span-3">
-              <label className="block p-2 font-bold tracking-wider">
-                COMPANY NAME:
-              </label>
-              <input
-                type="text"
-                className="rounded-xl border border-white w-full bg-transparent px-2 focus:outline-none sm:py-2 2xl:h-12"
-                required
-              />
-            </div>
-            <div className="max-md:col-span-3">
-              <label className="block p-2 font-bold tracking-wider">
-                JOB TYPE:
-              </label>
-              <select
-                className="w-full appearance-none rounded-xl border border-white bg-transparent px-2 sm:py-2 after:text-right after:text-white after:content-['hello'] focus:outline-none 2xl:h-12"
-                required
-              >
-                <option value="web-development" className="text-black">
-                  Web Development
-                </option>
-                <option value="branding" className="text-black">
-                  Branding & Design
-                </option>
-                <option value="marketing" className="text-black">
-                  Digital Marketing
-                </option>
-                <option value="hug" className="text-black">
-                  Just a hug 🫂
-                </option>
-              </select>
-            </div>
+      <div className="mt-4 grid grid-cols-4 rounded-3xl border border-white bg-black/60 p-2 lg:max-w-[60vw]">
+        <div className="col-span-3 flex flex-col justify-around border-r border-white p-2 lg:text-lg 2xl:p-4">
+          <div>
+            <h1 className="font-bold lg:text-2xl">Address:</h1>
+            <p className="font-light italic text-white/60 hover:text-white">
+              7901 4th St. N STE 12325 St.Petersburg, FL 33702
+            </p>
           </div>
           <div>
-            <label className="block p-2 font-bold uppercase tracking-wider">
-              Brief Project Details:
-            </label>
-            <textarea className="w-full appearance-none rounded-xl border bg-transparent p-4 focus:outline-none max-sm:h-4"></textarea>
-          </div>
-          <div className="text-center">
-            <button
-              type="submit"
-              className="mt-2 w-full appearance-none rounded-xl bg-white p-2 font-black tracking-widest text-black transition-all duration-300 hover:bg-black hover:text-white"
+            <h1 className="font-bold lg:text-2xl">Email:</h1>
+            <p
+              className="font-light italic text-white/60 hover:text-white"
+              onClick={handleMail}
             >
-              SUBMIT
-            </button>
+              contact@martnetics.com
+            </p>
+          </div>
+          <div>
+            <h1 className="font-bold lg:text-2xl">Phone:</h1>
+            <p className="font-light italic text-white">+1 (786) 998 0726</p>
+            <div className="italic text-white/60 hover:text-white">
+              Book a call?
+            </div>
           </div>
         </div>
-      </form>
-
-      <div className="flex flex-row justify-center gap-20 pt-8">
-        <a href="">
-          <FontAwesomeIcon
-            icon={faInstagram}
-            className="cursor-none transition-colors duration-300 hover:text-black"
-            size="2x"
-          />
-        </a>
-        <a href="">
-          <FontAwesomeIcon
-            icon={faTwitter}
-            size="2x"
-            className="cursor-none transition-colors duration-300 hover:text-black"
-          />
-        </a>
-        <a href="">
-          <FontAwesomeIcon
-            icon={faBehance}
-            size="2x"
-            className="cursor-none transition-colors duration-300 hover:text-black"
-          />
-        </a>
-        <a href="">
-          <FontAwesomeIcon
-            icon={faYoutube}
-            size="2x"
-            className="cursor-none transition-colors duration-300 hover:text-black"
-          />
-        </a>
+        <div className="flex flex-col items-center justify-center gap-4 p-4 2xl:gap-8">
+          <Icons />
+        </div>
+      </div>
+      <div className="mt-4 text-xs italic text-white/30 lg:text-sm">
+        Or just fill in the email form below and we&apos;ll get to you.😇
       </div>
     </div>
   );
