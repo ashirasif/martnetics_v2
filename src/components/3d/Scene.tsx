@@ -11,6 +11,7 @@ import { Suspense, useEffect, useRef } from "react";
 
 import Frames from "~/components/3d/Frames";
 import Watch from "~/components/3d/Watch";
+import Services3D from "./Services3D";
 
 import IntroText3d from "./introText3d";
 
@@ -43,19 +44,16 @@ export const Scene = ({
   currentPage: number;
   handleState: (s: boolean) => void;
 }) => {
-  const pages = useRef<number>(9);
+  const pages = useRef<number>(7);
   const camRef = useRef(null);
   const cameraPosition = {
     1: [0, 0, 9],
     2: [100, 0, -90],
     3: [100, 0, -140],
-    4: isMobile ? [0, 2, -87] : [0, 0.5, -90],
-    5: isMobile ? [0, 1.5, -90] : [-2, 0.5, -92],
-    6: [0, 0, 100],
-    7: [0, 0, 50],
-    8: [0, 0, -90],
-    9: [0, 0, 0],
-    10: [0, 0, -90],
+    4: [0, 1, -8],
+    5: [0, 0, 50],
+    6: [0, 0, -90],
+    7: [0, 0, 0],
   };
 
   useFrame((state, dt) => {
@@ -93,11 +91,11 @@ export const Scene = ({
         position={[100, 0, -100]}
         isMobile={isMobile}
       />
-      <Watch
+        <Services3D
         start={3 / pages.current}
-        end={5 / pages.current}
+        end={4 / pages.current}
         prog={m}
-        position={[0, 0, -100]}
+        position={[0, 0, -8]}
         isMobile={isMobile}
         currentPage={currentPage}
       />

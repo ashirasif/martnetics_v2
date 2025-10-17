@@ -15,10 +15,16 @@ const NavBar = ({
     <>
       <div className="hidden flex-row gap-8 px-8 text-xl font-normal tracking-widest text-white md:flex">
         <div
+          onClick={() => setM(3 / pages)}
+          className="hover: rounded-2xl bg-black p-3 transition-all duration-200 hover:bg-white hover:text-black"
+        >
+          Services
+        </div>
+        <div
           onClick={() => setM(5 / pages)}
           className="hover: rounded-2xl bg-black p-3 transition-all duration-200 hover:bg-white hover:text-black"
         >
-          Projects
+          Contact
         </div>
         <div className="hover: rounded-2xl bg-black p-3 transition-all duration-200 hover:bg-white hover:text-black">
           Blog
@@ -28,12 +34,6 @@ const NavBar = ({
           className="hover: rounded-2xl bg-black p-3 transition-all duration-200 hover:bg-white hover:text-black"
         >
           About
-        </div>
-        <div
-          onClick={() => setM(7 / pages)}
-          className="hover: rounded-2xl bg-black p-3 transition-all duration-200 hover:bg-white hover:text-black"
-        >
-          Contact
         </div>
       </div>
       <div
@@ -50,11 +50,19 @@ const NavBar = ({
             </div>
             <div
               onClick={() => {
+                setM(3 / pages);
+                openNav(false);
+              }}
+            >
+              Services
+            </div>
+            <div
+              onClick={() => {
                 setM(5 / pages);
                 openNav(false);
               }}
             >
-              Projects
+              Contact
             </div>
             <div>Blog</div>
             <div
@@ -65,15 +73,7 @@ const NavBar = ({
             >
               About
             </div>
-            <div
-              onClick={() => {
-                setM(7 / pages);
-                openNav(false);
-              }}
-            >
-              Contact
-            </div>
-          </div>
+                  </div>
         </div>
       ) : null}
     </>

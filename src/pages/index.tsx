@@ -14,11 +14,12 @@ import NavBar from "~/components/navbar";
 import Icons from "~/components/icons";
 import PageDots from "~/components/pageDots";
 import Form from "~/components/form";
+import Services from "~/components/services";
 
 export default function Home() {
   const [dpr, setDpr] = useState<number>(1);
   const [m, setM] = useState<number>(0.002);
-  const pages = useRef<number>(9);
+  const pages = useRef<number>(7);
   const [perm, setPerm] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [isMobile, setIsMobile] = useState<boolean>(false);
@@ -56,9 +57,9 @@ export default function Home() {
   });
 
   const springProductShowcase = useSpring({
-    opacity: currentPage == 4 ? 1 : 0,
-    left: currentPage == 4 ? "0" : "-100vw",
-    pointerEvents: currentPage == 4 ? "auto" : "none",
+    opacity: 0,
+    left: "-100vw",
+    pointerEvents: "none",
     config: {
       mass: 1,
       tension: 200,
@@ -72,17 +73,13 @@ export default function Home() {
   });
 
   const springWatchSpecs = useSpring({
-    opacity: currentPage == 5 ? 1 : 0,
-    left: currentPage == 5 ? (isMobile ? "0vw" : "15vw") : "-100vw",
-    pointerEvents: currentPage == 5 ? "auto" : "none",
+    opacity: 0,
+    left: "-100vw",
+    pointerEvents: "none",
     config: config.default,
   });
 
-  const springTestimonials = useSpring({
-    opacity: currentPage == 7 ? 1 : 0,
-    pointerEvents: currentPage == 7 ? "auto" : "none",
-  });
-
+  
   const scrollSpring = useSpring({
     from: {
       bottom: "-10rem",
@@ -98,10 +95,10 @@ export default function Home() {
     config: config.default,
   });
 
-  const springProjects = useSpring({
-    opacity: currentPage == 6 ? 1 : 0,
-    right: currentPage == 6 ? "0" : "-100vw",
-    pointerEvents: currentPage == 6 ? "auto" : "none",
+  const springServices = useSpring({
+    opacity: currentPage == 4 ? 1 : 0,
+    left: currentPage == 4 ? "0" : "-100vw",
+    pointerEvents: currentPage == 4 ? "auto" : "none",
     config: {
       mass: 1,
       tension: 200,
@@ -109,14 +106,30 @@ export default function Home() {
     },
   });
 
+  const springProjects = useSpring({
+    opacity: 0,
+    right: "-100vw",
+    pointerEvents: "none",
+    config: {
+      mass: 1,
+      tension: 200,
+      friction: 30,
+    },
+  });
+
+  const springTestimonials = useSpring({
+    opacity: currentPage == 5 ? 1 : 0,
+    pointerEvents: currentPage == 5 ? "auto" : "none",
+  });
+
   const springContact = useSpring({
-    opacity: currentPage == 8 ? 1 : 0,
-    pointerEvents: currentPage == 8 ? "auto" : "none",
+    opacity: currentPage == 6 ? 1 : 0,
+    pointerEvents: currentPage == 6 ? "auto" : "none",
   });
 
   const springForm = useSpring({
-    opacity: currentPage == 9 ? 1 : 0,
-    pointerEvents: currentPage == 9 ? "auto" : "none",
+    opacity: currentPage == 7 ? 1 : 0,
+    pointerEvents: currentPage == 7 ? "auto" : "none",
   });
 
   // haqndles isMobile
@@ -161,12 +174,10 @@ export default function Home() {
     1: "bg-black",
     2: "bg-[#000129]",
     3: "bg-[#110814]",
-    4: "bg-[#001a1e]",
-    5: "bg-[#001a1e]",
-    6: "bg-teal-950",
-    7: "bg-black",
-    8: "bg-[#000d28]",
-    9: "bg-[#000d17]",
+    4: "bg-[#1a1a2e]",
+    5: "bg-black",
+    6: "bg-[#000d28]",
+    7: "bg-[#000d17]",
   };
 
   const bind = useDrag(
@@ -268,7 +279,7 @@ export default function Home() {
                       <li>
                         <div
                           className="transition-all duration-300 hover:text-white"
-                          onClick={() => setM(5 / pages.current)}
+                          onClick={() => setM(6 / pages.current)}
                         >
                           Projects
                         </div>
@@ -289,7 +300,15 @@ export default function Home() {
                       <li>
                         <div
                           className="transition-all duration-300 hover:text-white"
-                          onClick={() => setM(7 / pages.current)}
+                          onClick={() => setM(3 / pages.current)}
+                        >
+                          Services
+                        </div>
+                      </li>
+                      <li>
+                        <div
+                          className="transition-all duration-300 hover:text-white"
+                          onClick={() => setM(5 / pages.current)}
                         >
                           Contact
                         </div>
@@ -367,6 +386,14 @@ export default function Home() {
                     <div>- Tells the time just fine ⌛</div>
                   </div>
                 </div>
+              </a.div>
+
+              {/* Services */}
+              <a.div
+                className={"absolute top-0 z-20"}
+                style={springServices as any}
+              >
+                <Services />
               </a.div>
 
               {/* Projects */}

@@ -26,6 +26,7 @@
     "@trpc/react-query": "^10.37.1",
     "@trpc/server": "^10.37.1",
     "@use-gesture/react": "^10.3.0",
+    "lucide-react": "^0.546.0",
     "maath": "^0.7.0",
     "next": "^13.4.19",
     "react": "18.2.0",
