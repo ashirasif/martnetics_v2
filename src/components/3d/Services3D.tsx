@@ -90,7 +90,8 @@ export default function Services3D({
     { icon: "UI", color: "#ec4899", name: "UI/UX" },
     { icon: "M", color: "#10b981", name: "Mobile" },
     { icon: "AI", color: "#8b5cf6", name: "AI" },
-    { icon: "3D", color: "#f59e0b", name: "3D Web" }
+    { icon: "3D", color: "#f59e0b", name: "3D Web" },
+    { icon: "☁", color: "#06b6d4", name: "Cloud" }
   ];
 
   useEffect(() => {
@@ -128,7 +129,7 @@ export default function Services3D({
         const x = baseX + cursorInfluenceX;
         const z = baseZ + cursorInfluenceZ;
 
-        if (groupRef.current?.children[index]) { // Update positions
+        if (groupRef.current?.children[index]) { // Update service icon positions
           easing.damp3(groupRef.current.children[index]?.position as THREE.Vector3, [x, y, z], 0.1, dt);
         }
       });

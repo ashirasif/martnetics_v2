@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSpring, a } from "@react-spring/web";
-import { Code, Palette, Smartphone, Bot, Box } from "lucide-react";
+import { Code, Palette, Smartphone, Bot, Box, Cloud } from "lucide-react";
 
 function Services() {
   const [hoveredService, setHoveredService] = useState<string>("");
@@ -35,6 +35,12 @@ function Services() {
       description: "Immersive 3D experiences for the web using WebGL and Three.js. We create interactive visualizations, product showcases, and virtual tours that captivate your audience.",
       icon: <Box />,
       color: "#f59e0b"
+    },
+    {
+      title: "Cloud Services",
+      description: "Scalable cloud infrastructure and deployment solutions. We architect robust cloud systems using AWS, Azure, and Google Cloud to ensure your applications are performant, secure, and globally accessible.",
+      icon: <Cloud />,
+      color: "#06b6d4"
     }
   ];
 
