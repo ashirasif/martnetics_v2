@@ -55,6 +55,9 @@ function Contact() {
       <div className="mt-4 text-xs italic text-white/30 lg:text-sm">
         Or just fill in the email form below and we&apos;ll get to you.😇
       </div>
+      <div className="mt-4 text-sm italic text-white/70 lg:text-base">
+        7901 4TH ST N STE 12325 ST PETERSBURG 33702-4305
+      </div>
     </div>
   );
 }
