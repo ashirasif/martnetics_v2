@@ -20,7 +20,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${robotoMono.variable}`}>
-      <body className="cursor-none bg-black text-white">
+      <body className="min-h-screen cursor-none bg-black text-white">
         {children}
 
         <Cursor />

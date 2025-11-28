@@ -2,7 +2,10 @@
 
 import { useEffect, useRef } from "react";
 
+import { useIsMobile } from "@/hooks/use-mobile";
+
 export default function Cursor() {
+  const isMobile = useIsMobile();
   const cursorRef = useRef<HTMLDivElement>(null);
 
   const positionElement = (e: MouseEvent) => {
@@ -26,7 +29,7 @@ export default function Cursor() {
     return () => window.removeEventListener("mousemove", positionElement);
   }, []);
 
-  return (
+  return isMobile ? null : (
     <div
       ref={cursorRef}
       className="pointer-events-none absolute top-0 left-0 z-50 h-8 w-8 rounded-full bg-white/75"
